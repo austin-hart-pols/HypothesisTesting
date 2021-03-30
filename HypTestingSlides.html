@@ -1,0 +1,410 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>HYPOTHESIS TESTING</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Austin Hart" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+# HYPOTHESIS TESTING
+## Data versus the status quo
+### Austin Hart
+### American University
+
+---
+
+
+
+
+
+
+
+# Topics covered
+
+- Logic of hypothesis testing  
+
+- Meaning of a `\(p\)`-value  
+
+- Three implementations
+  - `\(Z\)`-test for sample mean
+  - `\(t\)`-test for difference of means
+  - `\(F\)`-test for difference of group means  
+  
+- Jung et al (2014). "Female-named hurricanes" 
+
+
+---
+class: inverse, middle, right
+
+# HYPOTHESIS TESTING
+### Logic and Process
+
+
+---
+# Hypothesis testing
+
+### Statistical hypothesis testing 
+
+&gt; A method of inference that provides a basis for rejecting a hypothesis based on the plausibility of the data. 
+&gt;
+&gt; Typically for evaluating "significance" of an association observed in sample data.
+
+
+---
+# Testing procedure
+
+Given a sample statistic from your data:
+
+- Formalize competing hypotheses
+  - Alternative, `\(H_A\)`: your argument
+  - Null, `\(H_0\)`: opposite of `\(H_A\)`; "status quo" expectation  
+  
+- Calculate prob of the data given the null, `\(p = Pr(Sample~Stat | H_0)\)`  
+
+- Reject/Fail to reject null, typically when `\(p\leq0.05\)`  
+
+
+---
+# Setting up hypotheses
+
+- Alternative hypothesis, `\(H_A\)`
+  - *Your* expectation
+  - Empirical implication of your theory
+
+- Null hypothesis, `\(H_0\)`
+  - Logical opposite of `\(H_A\)`
+  - Typically the status quo
+
+- TIPS
+  - ALWAYS frame hypotheses in terms of parameters
+  - It's all about the null. 
+  
+  
+---
+# To reject or not to reject?
+
+&gt; On what grounds can I reject the null hypothesis?
+
+- Default position: status quo wins
+  - fail to reject the null
+  - Stick with conventional wisdom
+  
+- Reject the null
+  - *iff* sample stat is implausible given `\(H_0\)`
+  - typically `\(p \leq 0.05\)`
+
+
+---
+# How is this possible?
+
+&gt; Hypothesis testing is possible because of what we know about the sampling distribution of different sample statistics.
+
+- Pop parameters give shape to the sampling distribution
+
+- Null an argument about parameters *AND* sampling dist
+
+- Allows us to gauge probability of a sample stat
+
+
+---
+class: inverse, middle, right
+
+# THE ALL MIGHTY p-VALUE
+### Meaning and use
+
+---
+# The meaning of a p-value
+
+&gt; If the conventional wisdom is true, what share of samples reveal a stat or association like yours? 
+
+
+$$
+p = Pr(Sample~Stat | H_0)
+$$
+
+A p-value is the probability of observing a sample statistic under the assumption that the null hypothesis is true. 
+
+- Start with your test statistic, e.g. `\(\hat{p}\)`
+
+- Measures distance to the hypothesized parameter `\(\pi_0\)`
+
+- Standardize by number of standard errors $$ Z = \frac{\hat{p} - \pi_0}{\sigma_p} $$
+  
+  
+---
+# p-value as criterion
+
+- Science abhors Type 1 error (throwing away good status quo)
+
+- Reject null only for a massive disconnect b/w conventional wisdom and available evidence
+
+- Gold standard of 0.05
+  - Reject null when `\(p \leq 0.05\)`
+  - Fail to reject when `\(p &gt; 0.05\)`
+
+
+---
+class: inverse, middle, right
+
+# THREE HYPOTHESIS TESTS
+
+
+---
+# Population proportions (Z-test)
+
+&gt; Experts think that about 5% of U.S. adults are vegetarian. In a recent survey of 300 adults, you find that 9% identify as vegetarian. Is this significantly larger than the expert assessment?
+
+1. State hypotheses
+2. Calculate `\(p\)`-value based on a `\(Z\)`-test
+3. Reject/fail to reject the null
+
+
+---
+# Assessing differences of means (t-test)
+
+&gt; Jung et al. (2014) argue that female-named hurricanes are 
+&gt; deadlier than male-named hurricanes. Using the "hurricanes.csv" 
+&gt; data, describe the relationship and then evaluate their claim.
+
+
+---
+# Presenting results (t)
+
+The table below explores the relationship between hurricane-name gender and deaths based on data from 94 hurricanes that made landfall in the US from 1950 to 2012. Death totals ranged from a minimum of 0 to a maximum of 1,833 deaths (Katrina, 2005). Female-named hurricanes caused 57 deaths on average. Consistent with Jung et al.'s (2014) argument, male-named hurricanes saw an average of only 15 deaths. However, the difference of means is not statistically significant (t = 1.47, p = 0.07, 1-tailed) and we cannot reject the argument that death totals are unrelated to the storm's name.
+
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Deaths by gendered name&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; gender &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Min &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Max &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Median &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Female &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 65 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1833 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 57.4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Male &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 84 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.5 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+# Comparing equality of group means (F-test)
+
+&gt; Use the "hurricanes.csv" data to evaluate the relationship
+&gt; between the intensity of the storm at landfall (category) and
+&gt; deaths caused. Use an F-test to assess the siginficance.
+
+1. State hypotheses
+2. Calculate p-value based on `\(t\)`-test
+3. Reject/fail to reject the null
+
+
+---
+# Presenting results (F)
+
+The table below summarizes the relationship between the category of storm at landfall and the loss of life. Category 1 storms are the most common and also the least deadly (mean = 13). [more on others] There are only three category 5 storms in the data with more than 700 deaths on average. The differences are statistically significant (F = 10.93, p = 0.001), and we reject the null hypothesis of independence.
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Deaths by storm severity&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:right;"&gt; category &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Mean &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Median &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 12.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 2.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.8 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 17.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 8.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.4 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 717.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 256.0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+---
+class: inverse
+
+# Wrapping up
+
+- It's you against the status quo (null)  
+
+- Assess the data in light of the null  
+
+- Reject the status quo when what you see no longer makes sense in light of old dogma.
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

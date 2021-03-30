@@ -1,0 +1,245 @@
+---
+title: "HYPOTHESIS TESTING"
+subtitle: "Data versus the status quo"
+author: "Austin Hart"
+institute: "American University"
+output:
+  xaringan::moon_reader:
+    lib_dir: libs
+    css: [default, rladies, rladies-fonts]
+    nature:
+      highlightStyle: github
+      highlightLines: true
+      countIncrementalSlides: false
+---
+
+
+```{r setup, include=FALSE}
+options(htmltools.dir.version = FALSE)
+knitr::opts_chunk$set(
+  message=FALSE, warning=FALSE, eval = TRUE, echo = FALSE, 
+  fig.align = 'center', dev='svg'
+)
+```
+
+```{r results='hide'}
+library(tidyverse)
+library(magrittr)
+library(kableExtra)
+
+setwd("~/HypothesisTesting")
+df = read_csv("hurricanes.csv")
+```
+
+# Topics covered
+
+- Logic of hypothesis testing  
+
+- Meaning of a $p$-value  
+
+- Three implementations
+  - $Z$-test for sample mean
+  - $t$-test for difference of means
+  - $F$-test for difference of group means  
+  
+- Jung et al (2014). "Female-named hurricanes" 
+
+
+---
+class: inverse, middle, right
+
+# HYPOTHESIS TESTING
+### Logic and Process
+
+
+---
+# Hypothesis testing
+
+### Statistical hypothesis testing 
+
+> A method of inference that provides a basis for rejecting a hypothesis based on the plausibility of the data. 
+>
+> Typically for evaluating "significance" of an association observed in sample data.
+
+
+---
+# Testing procedure
+
+Given a sample statistic from your data:
+
+- Formalize competing hypotheses
+  - Alternative, $H_A$: your argument
+  - Null, $H_0$: opposite of $H_A$; "status quo" expectation  
+  
+- Calculate prob of the data given the null, $p = Pr(Sample~Stat | H_0)$  
+
+- Reject/Fail to reject null, typically when $p\leq0.05$  
+
+
+---
+# Setting up hypotheses
+
+- Alternative hypothesis, $H_A$
+  - *Your* expectation
+  - Empirical implication of your theory
+
+- Null hypothesis, $H_0$
+  - Logical opposite of $H_A$
+  - Typically the status quo
+
+- TIPS
+  - ALWAYS frame hypotheses in terms of parameters
+  - It's all about the null. 
+  
+  
+---
+# To reject or not to reject?
+
+> On what grounds can I reject the null hypothesis?
+
+- Default position: status quo wins
+  - fail to reject the null
+  - Stick with conventional wisdom
+  
+- Reject the null
+  - *iff* sample stat is implausible given $H_0$
+  - typically $p \leq 0.05$
+
+
+---
+# How is this possible?
+
+> Hypothesis testing is possible because of what we know about the sampling distribution of different sample statistics.
+
+- Pop parameters give shape to the sampling distribution
+
+- Null an argument about parameters *AND* sampling dist
+
+- Allows us to gauge probability of a sample stat
+
+
+---
+class: inverse, middle, right
+
+# THE ALL MIGHTY p-VALUE
+### Meaning and use
+
+---
+# The meaning of a p-value
+
+> If the conventional wisdom is true, what share of samples reveal a stat or association like yours? 
+
+
+$$
+p = Pr(Sample~Stat | H_0)
+$$
+
+A p-value is the probability of observing a sample statistic under the assumption that the null hypothesis is true. 
+
+- Start with your test statistic, e.g. $\hat{p}$
+
+- Measures distance to the hypothesized parameter $\pi_0$
+
+- Standardize by number of standard errors $$ Z = \frac{\hat{p} - \pi_0}{\sigma_p} $$
+  
+  
+---
+# p-value as criterion
+
+- Science abhors Type 1 error (throwing away good status quo)
+
+- Reject null only for a massive disconnect b/w conventional wisdom and available evidence
+
+- Gold standard of 0.05
+  - Reject null when $p \leq 0.05$
+  - Fail to reject when $p > 0.05$
+
+
+---
+class: inverse, middle, right
+
+# THREE HYPOTHESIS TESTS
+
+
+---
+# Population proportions (Z-test)
+
+> Experts think that about 5% of U.S. adults are vegetarian. In a recent survey of 300 adults, you find that 9% identify as vegetarian. Is this significantly larger than the expert assessment?
+
+1. State hypotheses
+2. Calculate $p$-value based on a $Z$-test
+3. Reject/fail to reject the null
+
+
+---
+# Assessing differences of means (t-test)
+
+> Jung et al. (2014) argue that female-named hurricanes are 
+> deadlier than male-named hurricanes. Using the "hurricanes.csv" 
+> data, describe the relationship and then evaluate their claim.
+
+
+---
+# Presenting results (t)
+
+The table below explores the relationship between hurricane-name gender and deaths based on data from 94 hurricanes that made landfall in the US from 1950 to 2012. Death totals ranged from a minimum of 0 to a maximum of 1,833 deaths (Katrina, 2005). Female-named hurricanes caused 57 deaths on average. Consistent with Jung et al.'s (2014) argument, male-named hurricanes saw an average of only 15 deaths. However, the difference of means is not statistically significant (t = 1.47, p = 0.07, 1-tailed) and we cannot reject the argument that death totals are unrelated to the storm's name.
+
+
+```{r ttest}
+
+  df %>%
+   group_by(gender) %>%
+   summarise(
+     n = n(),
+     Min = min(deaths),
+     Max = max(deaths),
+     Median = median(deaths),
+     Mean = mean(deaths)
+   ) %>%
+   kbl(digits = 1, caption = "Deaths by gendered name", type = 'html') %>%
+   kable_paper(bootstrap_options = "striped", full_width = F, 
+               position = "center")
+
+```
+
+---
+# Comparing equality of group means (F-test)
+
+> Use the "hurricanes.csv" data to evaluate the relationship
+> between the intensity of the storm at landfall (category) and
+> deaths caused. Use an F-test to assess the siginficance.
+
+1. State hypotheses
+2. Calculate p-value based on $t$-test
+3. Reject/fail to reject the null
+
+
+---
+# Presenting results (F)
+
+The table below summarizes the relationship between the category of storm at landfall and the loss of life. Category 1 storms are the most common and also the least deadly (mean = 13). [more on others] There are only three category 5 storms in the data with more than 700 deaths on average. The differences are statistically significant (F = 10.93, p = 0.001), and we reject the null hypothesis of independence.
+
+```{r Ftest}
+df %>%
+  group_by(category) %>%
+  summarize(
+    n = n(),
+    Mean = mean(deaths, na.rm = T),
+    Median = median(deaths, na.rm = T)
+  ) %>%
+  na.omit() %>%
+  kbl(digits = 1, caption = "Deaths by storm severity", type = 'html') %>%
+  kable_paper(bootstrap_options = "striped", full_width = F, 
+              position = "center")
+```
+
+---
+class: inverse
+
+# Wrapping up
+
+- It's you against the status quo (null)  
+
+- Assess the data in light of the null  
+
+- Reject the status quo when what you see no longer makes sense in light of old dogma.
