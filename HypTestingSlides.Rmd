@@ -17,8 +17,8 @@ output:
 ```{r setup, include=FALSE}
 options(htmltools.dir.version = FALSE)
 knitr::opts_chunk$set(
-  message=FALSE, warning=FALSE, eval = TRUE, echo = FALSE, 
-  fig.align = 'center'
+  message=FALSE, warning=FALSE, eval=TRUE, echo=FALSE, 
+  fig.align = 'center', dev='svg'
 )
 ```
 
@@ -98,18 +98,20 @@ class: inverse, middle, right
 ---
 # The meaning of a p-value
 
-> If the null hypothesis is true, what share of samples reveal a stat or association like yours? 
-
-A p-value is the probability of observing a sample statistic under the assumption that the null hypothesis is true. 
+> A p-value is the probability of observing a sample statistic under the assumption that the null hypothesis is true. 
 
 - Start with your sample statistic, e.g. $\bar{Y}=65$
 
-- Measures distance to the hypothesized parameter $\mu_0 \leq 50$
+- Measure distance to the hypothesized parameter $\mu_0 \leq 50$
 
-- Standardize distance as number of standard errors
- 
+- Standardize wrt standard errors
+
 $$ 
-t = \frac{\bar{Y} - \mu_0}{\sigma_{\bar{Y}}} = \frac{65-50}{15} = 1
+\begin{align}
+t &= \frac{\bar{Y} - \mu_0}{\sigma_{\bar{Y}}} \\
+&= \frac{65-50}{15} \\
+&= 1
+\end{align}
 $$
 
 - Calculate and connect  
@@ -159,75 +161,81 @@ class: inverse
 # Population mean (t-test)
 
 - I have data for ONE numeric variable.
+
 - I want to test hypotheses about a pop mean
 
 
 ---
 # Population mean (t-test)
 
-.left-column{
+.left-column[
 ### Setup
-}
+]
 
-.right-column{
+.right-column[
 > On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
 
 - State hypotheses
+
 - Calculate $p$-value based on a $t$-test
+
 - Reject/fail to reject the null
-}
+
+]
 
 ---
 # Population mean (t-test)
 
-.left-column{
+.left-column[
 ### Setup
 ### Hypotheses
-}
+]
 
-.right-column{
+.right-column[
 > On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
 
 - $H_A:~\mu>5$
+
 - $H_0:~\mu\leq5$
 
-}
+]
 
 ---
 # Population mean (t-test)
 
-.left-column{
+.left-column[
 ### Setup
 ### Hypotheses
 ### t-test
-}
+]
 
-.right-column{
+.right-column[
 > On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
 
 
 ```{r tmean,echo=T}
 t.test(df$femScale, mu = 5, alternative = 'greater')
 ```
-}
+
+]
 
 ---
 # Population mean (t-test)
 
-.left-column{
+.left-column[
 ### Setup
 ### Hypotheses
 ### t-test
 ### Reject?
-}
+]
 
-.right-column{
+.right-column[
 > On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
 
 
 Student researchers rated the femininity of 92 hurricanes. The mean score of 6.8 is significantly higher than 5 $(t=5.3,~p<0.001)$. I conclude that hurricane names are systematically more feminine.
 
-}
+]
 
 
 ---
@@ -237,6 +245,7 @@ class: inverse
 - I have:
   - Numeric outcome variable
   - Binary exposure variable
+  
 
 - I want to know if the mean outcome differs by group
 
@@ -244,45 +253,48 @@ class: inverse
 ---
 # Difference of means (t-test)
 
-.left-column{
+.left-column[
 ### Setup
-}
+]
 
-.right-column{
+.right-column[
 > Are female-named hurricanes deadlier than male-named hurricanes? Describe the relationship, and evaluate the claim.
 
 - State hypotheses
+
 - Calculate $p$-value from diff of means test
+
 - Reject/Fail to reject the null
 
-}
+]
 
 ---
 # Difference of means (t-test)
 
-.left-column{
+.left-column[
 ### Setup
 ### Hypotheses
-}
+]
 
-.right-column{
+.right-column[
 > Are female-named hurricanes deadlier than male-named hurricanes? Describe the relationship, and evaluate the claim.
 
-- Alternative: $H_A:~\mu_{Fem} > \mu_{Male}$
-- Null: $H_0~\mu_{Fem} \leq \mu_{Male}$
+- Alternative, $H_A:~\mu_{Fem} > \mu_{Male}$
 
-}
+- Null, $H_0~\mu_{Fem} \leq \mu_{Male}$
+
+]
 
 ---
 # Difference of means (t-test)
 
-.left-column{
+.left-column[
 ### Setup
 ### Hypotheses
 ### t-test
-}
+]
 
-.right-column{
+.right-column[
 > Are female-named hurricanes deadlier than male-named hurricanes? Describe the relationship, and evaluate the claim.
 
 ```{r tmeans, echo=TRUE}
@@ -290,19 +302,19 @@ t.test(log(deaths+1) ~ gender, data = df,
        alternative = 'greater')
 ```
 
-}
+]
 
 ---
 # Difference of means (t-test)
 
-.left-column{
+.left-column[
 ### Setup
 ### Hypotheses
 ### t-test
 ### Reject?
-}
+]
 
-.right-column{
+.right-column[
 The table below shows the relationship between hurricane-name gender and deaths using data from 94 hurricanes that made landfall in the US from 1950 to 2012. Death totals ranged from a 0 to 1,833 (Katrina, 2005). Female-named hurricanes caused 57 deaths on average. Consistent with Jung et al.'s (2014) argument, male-named hurricanes saw an average of only 15 deaths. However, the difference of means is not statistically significant ($t = 0.92,~ p = 0.19$, 1-tailed test of log-transformed mean).
 
 ```{r ttest}
@@ -323,7 +335,7 @@ The table below shows the relationship between hurricane-name gender and deaths 
 
 ```
 
-}
+]
 
 
 ---
@@ -336,20 +348,23 @@ class: inverse
 
 - I want to know if the mean outcome differs across groups
 
+
 ---
 # Comparing equality of group means (F-test)
 
 > Evaluate the relationship between the intensity of the storm at landfall (category) and deaths caused. Use an F-test to assess the siginficance.
 
-1. State hypotheses, $H_0:$ equality of group means
-2. Calculate $p$-value based on $F$-test
-3. Reject/fail to reject the null
+- State hypotheses, $H_0:$ equality of group means
+
+- Calculate $p$-value based on $F$-test
+
+- Reject/fail to reject the null
 
 
 ---
 # Presenting results (F)
 
-The table below summarizes the relationship between the category of storm at landfall and the loss of life. Category 1 storms are the most common and also the least deadly (mean = 13). [more on others] There are only three category 5 storms in the data with more than 700 deaths on average. The differences are statistically significant ($F = 31.14, ~ p < 0.001$), and we reject the null hypothesis of independence.
+The table below summarizes the relationship between the category of storm at landfall and the loss of life. Category 1 storms are the most common and also the least deadly (mean = 13). [more on others] There are only three category 5 storms in the data with more than 700 deaths on average. The differences are statistically significant $(F = 31.14, ~ p < 0.001)$, and we reject the null hypothesis of independence.
 
 
 ```{r Ftest}
@@ -375,86 +390,92 @@ class: inverse
 - I have:
   - Numeric outcome variable
   - (typically) Numeric exposure variable
-  
+
+
 - I want to know if the mean outcome is related to level of exposure
 
 
 ---
 # Testing regression coefficients
 
-.left-column{
+.left-column[
 
 ### Setup
 
-}
-.right-column{
+]
+
+.right-column[
 
 > Is hurricane damage associated with the "femininity" of the storm's name?
 
 - State hypotheses
+
 - Estimate the regression, eval the coefficient (t-test)
+
 - Present the results
 
-}
+]
 
 ---
 # Testing regression coefficients
 
-.left-column{
+.left-column[
 
 ### Setup
 ### Hypotheses
 
-}
-.right-column{
+]
+
+.right-column[
 
 > Is hurricane damage associated with the "femininity" of the storm's name?
 
 Given PRF: $damage_i = \alpha + \beta(femScale_i) + e_i$
 - $H_A:~\beta \neq 0$
+
 - $H_0:~\beta = 0$
 
-}
+]
 
 ---
 # Testing regression coefficients
 
-.left-column{
+.left-column[
 
 ### Setup
 ### Hypotheses
 ### Estimate
 
-}
-.right-column{
+]
 
-> Is hurricane damage associated with the "femininity" of the storm's name?
+.right-column[
 
 ```{r ols1, echo=TRUE}
 # Estimate and store
   e1 = lm(log(deaths + 1) ~ femScale, data = df)
   e2 = lm(log(damage) ~ femScale, data = df)
-    
+
 # Present as table
-  stargazer(e1,e2, type = 'text',
-            keep.stat = 'n')
+  stargazer(e1, e2, type = 'text', keep.stat = 'n')
 ```
 
-}
+]
 
 ---
 # Testing regression coefficients
 
-.left-column{
+.left-column[
 
 ### Setup
 ### Hypotheses
 ### Estimate
 ### Interpret
 
-}
-.right-column{
+]
+.right-column[
 
 We regressed hurricane deaths on the perceived femininity of 92 hurricanes making landfall in the US. We find that a one-point increase in femininity raises the average death toll by 1.5%. However, the effect is not significantly different from 0 $(p=0.74)$.
 
-}
+Note that this finding is robust to using damage as the outcome measure instead of deaths. Here we find mean damage increasing by about 3% with femininity, but the effect is not significantly different from 0 $(p=0.67)$. 
+
+]
