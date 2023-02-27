@@ -39,23 +39,12 @@ class: center, middle, inverse, title-slide
 # Topics covered
 
 - Hypothesis testing  
-<<<<<<< HEAD
-
-- Meaning of a `\(p\)`-value  
-
-- Four implementations
-  - `\(t\)`-test for sample means
-  - `\(t\)`-test for difference of means
-  - `\(F\)`-test for multiple group differences
-  - `\(t\)`-test for regression coefficients
-=======
   
 - Four implementations
   - `\(t\)`-test for sample means
   - `\(t\)`-test for difference of means
   - `\(t\)`-test for regression coefficients
   - `\(\chi^2\)`-test for tabular analysis
->>>>>>> 9d20796 (s23up)
   
 - Jung et al (2014). "Female-named hurricanes" 
 
@@ -80,17 +69,6 @@ class: inverse, middle, right
 ---
 # Process for testing hypotheses
 
-<<<<<<< HEAD
-Given a sample statistic from your data:
-
-- Formalize competing hypotheses
-  - Alternative, `\(H_A\)`: baseline expectation
-  - Null, `\(H_0\)`: opposite of `\(H_A\)`; "status quo" expectation  
-  
-- Calculate prob of the data given true null, `\(p = Pr(Sample~Stat | H_0)\)`  
-
-- Reject/Fail to reject null, typically when `\(p \leq 0.05\)`  
-=======
 &gt; Given a hypothesis about a population parameter, calculate the probability of finding your sample statistic.  
 &gt; Reject the hypothesis when probability is exceptionally low, typically below 0.05. 
   
@@ -135,7 +113,6 @@ $$
 - Find the critical value, `\(Z^*\)`  
    
 - Reject null if test statistic larger than critical value
->>>>>>> 9d20796 (s23up)
 
 
 ---
@@ -146,11 +123,7 @@ $$
 
 Null can only be wrong in one direction.
 
-<<<<<<< HEAD
-- Null an argument about parameters *AND, THEREFORE,* sampling dist
-=======
 &gt; Reject `\(H_0\)` if `\(Z &gt; 1.645\)`
->>>>>>> 9d20796 (s23up)
 
 &lt;img src="HypTestingSlides_files/figure-html/sclt1s-1.svg" style="display: block; margin: auto;" /&gt;
 
@@ -179,45 +152,10 @@ class: inverse, middle, right
 class: inverse
 # Population mean (t-test)
 
-<<<<<<< HEAD
-&gt; A p-value is the probability of observing a sample statistic under the assumption that the null hypothesis is true. 
-=======
 - I have data for ONE numeric variable.
 - I want to test hypotheses about a pop mean. `\(\mu_y\)`
->>>>>>> 9d20796 (s23up)
 
-- Start with your sample statistic, e.g. `\(\bar{Y}=65\)`
 
-<<<<<<< HEAD
-- Measure distance to the hypothesized parameter `\(\mu_0 \leq 50\)`
-
-- Standardize wrt standard errors
-
-$$ 
-`\begin{align}
-t &amp;= \frac{\bar{Y} - \mu_0}{\sigma_{\bar{Y}}} \\
-&amp;= \frac{65-50}{15} \\
-&amp;= 1
-\end{align}`
-$$
-
-- Calculate and connect  
-
-$$
-Pr(\bar{Y} \geq 65 | \mu_0 \leq 50) = Pr(t \geq 1) \approx 0.16
-$$
-
----
-# p-value as criterion
-
-- Science abhors Type 1 error (throwing away good null/status quo)
-
-- Reject null only for a massive disconnect b/w convention and available evidence
-
-- Gold standard of 0.05
-  - Reject null when `\(p \leq 0.05\)`
-  - Fail to reject when `\(p &gt; 0.05\)`
-=======
 ---
 # Population mean (t-test)
 
@@ -237,250 +175,22 @@ $$
 - Calculate test statistic
   
 - Reject/fail to reject the null
->>>>>>> 9d20796 (s23up)
 
 ]
 
 ---
 # Population mean (t-test)
 
-<<<<<<< HEAD
-# FOUR TESTS IN R
-
-### Using "hurricanes.csv" from Jung et al. (2014)
-=======
 .left-column[
 ### Setup
 ### Hypotheses
 ]
->>>>>>> 9d20796 (s23up)
 
 .right-column[
 - `\(H_A:~\mu &gt; 5\)`
   
 - `\(H_0:~\mu\leq 5\)`
 
-<<<<<<< HEAD
----
-# Every R script
-
-
-```r
-# Packages
-  library(tidyverse)
-  library(stargazer)
-
-# Set project folder
-  setwd("~/sis600")
-  
-# load data
-  df = read_csv("hurricanes.csv")
-```
-
-
----
-class: inverse
-# Population mean (t-test)
-
-- I have data for ONE numeric variable.
-
-- I want to test hypotheses about a pop mean
-
-
----
-# Population mean (t-test)
-
-.left-column[
-### Setup
-]
-
-.right-column[
-&gt; On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
-
-- State hypotheses
-
-- Calculate `\(p\)`-value based on a `\(t\)`-test
-
-- Reject/fail to reject the null
-
-]
-
----
-# Population mean (t-test)
-
-.left-column[
-### Setup
-### Hypotheses
-]
-
-.right-column[
-&gt; On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
-
-- `\(H_A:~\mu&gt;5\)`
-
-- `\(H_0:~\mu\leq5\)`
-
-]
-
----
-# Population mean (t-test)
-
-.left-column[
-### Setup
-### Hypotheses
-### t-test
-]
-
-.right-column[
-&gt; On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
-
-
-
-```r
-t.test(df$femScale, mu = 5, alternative = 'greater')
-```
-
-```
-## 
-## 	One Sample t-test
-## 
-## data:  df$femScale
-## t = 5.2927, df = 91, p-value = 4.141e-07
-## alternative hypothesis: true mean is greater than 5
-## 95 percent confidence interval:
-##  6.221675      Inf
-## sample estimates:
-## mean of x 
-##  6.780797
-```
-
-]
-
----
-# Population mean (t-test)
-
-.left-column[
-### Setup
-### Hypotheses
-### t-test
-### Reject?
-]
-
-.right-column[
-&gt; On balance, are hurricane names more feminine than masculine? Use student ratings (femScale) to find out.  
-
-
-Student researchers rated the femininity of 92 hurricanes. The mean score of 6.8 is significantly higher than 5 `\((t=5.3,~p&lt;0.001)\)`. I conclude that hurricane names are systematically more feminine.
-
-]
-
-
----
-class: inverse
-# Difference of means (t-test)
-
-- I have:
-  - Numeric outcome variable
-  - Binary exposure variable
-  
-
-- I want to know if the mean outcome differs by group
-
-
----
-# Difference of means (t-test)
-
-.left-column[
-### Setup
-]
-
-.right-column[
-&gt; Are female-named hurricanes deadlier than male-named hurricanes? Describe the relationship, and evaluate the claim.
-
-- State hypotheses
-
-- Calculate `\(p\)`-value from diff of means test
-
-- Reject/Fail to reject the null
-
-]
-
----
-# Difference of means (t-test)
-
-.left-column[
-### Setup
-### Hypotheses
-]
-
-.right-column[
-&gt; Are female-named hurricanes deadlier than male-named hurricanes? Describe the relationship, and evaluate the claim.
-
-- Alternative, `\(H_A:~\mu_{Fem} &gt; \mu_{Male}\)`
-
-- Null, `\(H_0~\mu_{Fem} \leq \mu_{Male}\)`
-
-]
-
----
-# Difference of means (t-test)
-
-.left-column[
-### Setup
-### Hypotheses
-### t-test
-]
-
-.right-column[
-&gt; Are female-named hurricanes deadlier than male-named hurricanes? Describe the relationship, and evaluate the claim.
-
-
-```r
-t.test(log(deaths+1) ~ gender, data = df,
-       alternative = 'greater')
-```
-
-```
-## 
-## 	Welch Two Sample t-test
-## 
-## data:  log(deaths + 1) by gender
-## t = 0.91964, df = 67.569, p-value = 0.1805
-## alternative hypothesis: true difference in means between group Female and group Male is greater than 0
-## 95 percent confidence interval:
-##  -0.2349648        Inf
-## sample estimates:
-## mean in group Female   mean in group Male 
-##             2.238231             1.949377
-```
-
-]
-
----
-# Difference of means (t-test)
-
-.left-column[
-### Setup
-### Hypotheses
-### t-test
-### Reject?
-]
-
-.right-column[
-The table below shows the relationship between hurricane-name gender and deaths using data from 94 hurricanes that made landfall in the US from 1950 to 2012. Death totals ranged from a 0 to 1,833 (Katrina, 2005). Female-named hurricanes caused 57 deaths on average. Consistent with Jung et al.'s (2014) argument, male-named hurricanes saw an average of only 15 deaths. However, the difference of means is not statistically significant ($t = 0.92,~ p = 0.19$, 1-tailed test of log-transformed mean).
-
-&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
-&lt;caption&gt;Deaths by gendered name&lt;/caption&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:left;"&gt; gender &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; N &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Min &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Max &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Med &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Avg &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Avg (log) &lt;/th&gt;
-=======
 - Statistics from replication data:  
 
 &lt;table&gt;
@@ -489,23 +199,12 @@ The table below shows the relationship between hurricane-name gender and deaths 
   &lt;tr&gt;
    &lt;th style="text-align:left;"&gt; Stat &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; Fem rating &lt;/th&gt;
->>>>>>> 9d20796 (s23up)
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
-<<<<<<< HEAD
-   &lt;td style="text-align:left;"&gt; Female &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 65 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1833 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 57.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.2 &lt;/td&gt;
-=======
    &lt;td style="text-align:left;"&gt; N &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 92.0 &lt;/td&gt;
->>>>>>> 9d20796 (s23up)
   &lt;/tr&gt;
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; Mean &lt;/td&gt;
@@ -635,96 +334,11 @@ class: inverse
    &lt;td style="text-align:left;"&gt; Mean &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 23.5 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 14.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.9 &lt;/td&gt;
   &lt;/tr&gt;
-<<<<<<< HEAD
-&lt;/tbody&gt;
-&lt;/table&gt;
-
-]
-
-
----
-class: inverse
-# Equality of group means (F-test)
-
-- I have:
-  - Numeric outcome variable
-  - Categorical exposure variable
-
-- I want to know if the mean outcome differs across groups
-
-
----
-# Comparing equality of group means (F-test)
-
-&gt; Evaluate the relationship between the intensity of the storm at landfall (category) and deaths caused. Use an F-test to assess the siginficance.
-
-- State hypotheses, `\(H_0:\)` equality of group means
-
-- Calculate `\(p\)`-value based on `\(F\)`-test
-
-- Reject/fail to reject the null
-
-
----
-# Presenting results (F)
-
-The table below summarizes the relationship between the category of storm at landfall and the loss of life. Category 1 storms are the most common and also the least deadly (mean = 13). [more on others] There are only three category 5 storms in the data with more than 700 deaths on average. The differences are statistically significant `\((F = 31.14, ~ p &lt; 0.001)\)`, and we reject the null hypothesis of independence.
-
-
-&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
-&lt;caption&gt;Deaths by storm severity&lt;/caption&gt;
- &lt;thead&gt;
-  &lt;tr&gt;
-   &lt;th style="text-align:right;"&gt; category &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; N &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Median &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Avg &lt;/th&gt;
-   &lt;th style="text-align:right;"&gt; Avg (log) &lt;/th&gt;
-  &lt;/tr&gt;
- &lt;/thead&gt;
-&lt;tbody&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 1 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 36 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 12.7 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 1.4 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 2 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 6.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 23.8 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.3 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 28 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 8.5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 17.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 2.3 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 21.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 29.4 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3.3 &lt;/td&gt;
-  &lt;/tr&gt;
-  &lt;tr&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 3 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 256.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 717.0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5.7 &lt;/td&gt;
-=======
   &lt;tr&gt;
    &lt;td style="text-align:left;"&gt; SD &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 47.1 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 21.5 &lt;/td&gt;
->>>>>>> 9d20796 (s23up)
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
@@ -778,18 +392,10 @@ class: inverse
 - I have:
   - Numeric outcome variable
   - (typically) Numeric exposure variable
-<<<<<<< HEAD
-
-
-- I want to know if the mean outcome is related to level of exposure
-
-
-=======
   
 - I want to know if the mean outcome is related to level of exposure
 
 
->>>>>>> 9d20796 (s23up)
 ---
 # Testing regression coefficients
 
@@ -798,18 +404,6 @@ class: inverse
 ### Setup
 
 ]
-<<<<<<< HEAD
-
-.right-column[
-
-&gt; Is hurricane damage associated with the "femininity" of the storm's name?
-
-- State hypotheses
-
-- Estimate the regression, eval the coefficient (t-test)
-
-- Present the results
-=======
 .right-column[
 
 &gt; Hurricane damage is correlated with the "femininity" of the storm's name.
@@ -823,7 +417,6 @@ class: inverse
 - Calculate test statistic
   
 - Reject/fail to reject the null
->>>>>>> 9d20796 (s23up)
 
 ]
 
@@ -836,17 +429,6 @@ class: inverse
 ### Hypotheses
 
 ]
-<<<<<<< HEAD
-
-.right-column[
-
-&gt; Is hurricane damage associated with the "femininity" of the storm's name?
-
-Given PRF: `\(damage_i = \alpha + \beta(femScale_i) + e_i\)`
-- `\(H_A:~\beta \neq 0\)`
-
-- `\(H_0:~\beta = 0\)`
-=======
 .right-column[
 
 Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
@@ -857,12 +439,12 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
 
 - Regression estimates from replication data:
 
-<div id="mttxktvhgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="zsauviuqxi" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#mttxktvhgb .gt_table {
+#zsauviuqxi .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -887,7 +469,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-left-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_heading {
+#zsauviuqxi .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -899,12 +481,12 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-right-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_caption {
+#zsauviuqxi .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#mttxktvhgb .gt_title {
+#zsauviuqxi .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -916,7 +498,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-bottom-width: 0;
 }
 
-#mttxktvhgb .gt_subtitle {
+#zsauviuqxi .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -928,13 +510,13 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-top-width: 0;
 }
 
-#mttxktvhgb .gt_bottom_border {
+#zsauviuqxi .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_col_headings {
+#zsauviuqxi .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -949,7 +531,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-right-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_col_heading {
+#zsauviuqxi .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -969,7 +551,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   overflow-x: hidden;
 }
 
-#mttxktvhgb .gt_column_spanner_outer {
+#zsauviuqxi .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -981,15 +563,15 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   padding-right: 4px;
 }
 
-#mttxktvhgb .gt_column_spanner_outer:first-child {
+#zsauviuqxi .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#mttxktvhgb .gt_column_spanner_outer:last-child {
+#zsauviuqxi .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#mttxktvhgb .gt_column_spanner {
+#zsauviuqxi .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1001,7 +583,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   width: 100%;
 }
 
-#mttxktvhgb .gt_group_heading {
+#zsauviuqxi .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1027,7 +609,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   text-align: left;
 }
 
-#mttxktvhgb .gt_empty_group_heading {
+#zsauviuqxi .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1042,15 +624,15 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   vertical-align: middle;
 }
 
-#mttxktvhgb .gt_from_md > :first-child {
+#zsauviuqxi .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#mttxktvhgb .gt_from_md > :last-child {
+#zsauviuqxi .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#mttxktvhgb .gt_row {
+#zsauviuqxi .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1069,7 +651,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   overflow-x: hidden;
 }
 
-#mttxktvhgb .gt_stub {
+#zsauviuqxi .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1082,7 +664,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   padding-right: 5px;
 }
 
-#mttxktvhgb .gt_stub_row_group {
+#zsauviuqxi .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1096,11 +678,11 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   vertical-align: top;
 }
 
-#mttxktvhgb .gt_row_group_first td {
+#zsauviuqxi .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#mttxktvhgb .gt_summary_row {
+#zsauviuqxi .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1110,16 +692,16 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   padding-right: 5px;
 }
 
-#mttxktvhgb .gt_first_summary_row {
+#zsauviuqxi .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_first_summary_row.thick {
+#zsauviuqxi .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#mttxktvhgb .gt_last_summary_row {
+#zsauviuqxi .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1129,7 +711,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-bottom-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_grand_summary_row {
+#zsauviuqxi .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1139,7 +721,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   padding-right: 5px;
 }
 
-#mttxktvhgb .gt_first_grand_summary_row {
+#zsauviuqxi .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1149,11 +731,11 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-top-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_striped {
+#zsauviuqxi .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#mttxktvhgb .gt_table_body {
+#zsauviuqxi .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1162,7 +744,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-bottom-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_footnotes {
+#zsauviuqxi .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1176,7 +758,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-right-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_footnote {
+#zsauviuqxi .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1185,7 +767,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   padding-right: 5px;
 }
 
-#mttxktvhgb .gt_sourcenotes {
+#zsauviuqxi .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1199,7 +781,7 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   border-right-color: #D3D3D3;
 }
 
-#mttxktvhgb .gt_sourcenote {
+#zsauviuqxi .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1207,64 +789,64 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   padding-right: 5px;
 }
 
-#mttxktvhgb .gt_left {
+#zsauviuqxi .gt_left {
   text-align: left;
 }
 
-#mttxktvhgb .gt_center {
+#zsauviuqxi .gt_center {
   text-align: center;
 }
 
-#mttxktvhgb .gt_right {
+#zsauviuqxi .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#mttxktvhgb .gt_font_normal {
+#zsauviuqxi .gt_font_normal {
   font-weight: normal;
 }
 
-#mttxktvhgb .gt_font_bold {
+#zsauviuqxi .gt_font_bold {
   font-weight: bold;
 }
 
-#mttxktvhgb .gt_font_italic {
+#zsauviuqxi .gt_font_italic {
   font-style: italic;
 }
 
-#mttxktvhgb .gt_super {
+#zsauviuqxi .gt_super {
   font-size: 65%;
 }
 
-#mttxktvhgb .gt_footnote_marks {
+#zsauviuqxi .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#mttxktvhgb .gt_asterisk {
+#zsauviuqxi .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#mttxktvhgb .gt_indent_1 {
+#zsauviuqxi .gt_indent_1 {
   text-indent: 5px;
 }
 
-#mttxktvhgb .gt_indent_2 {
+#zsauviuqxi .gt_indent_2 {
   text-indent: 10px;
 }
 
-#mttxktvhgb .gt_indent_3 {
+#zsauviuqxi .gt_indent_3 {
   text-indent: 15px;
 }
 
-#mttxktvhgb .gt_indent_4 {
+#zsauviuqxi .gt_indent_4 {
   text-indent: 20px;
 }
 
-#mttxktvhgb .gt_indent_5 {
+#zsauviuqxi .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -1303,7 +885,6 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
   
 </table>
 </div>
->>>>>>> 9d20796 (s23up)
 
 ]
 
@@ -1314,48 +895,12 @@ Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
 
 ### Setup
 ### Hypotheses
-<<<<<<< HEAD
-### Estimate
-=======
 ### t-stats
->>>>>>> 9d20796 (s23up)
 
 ]
 
 .right-column[
 
-<<<<<<< HEAD
-
-```r
-# Estimate and store
-  e1 = lm(log(deaths + 1) ~ femScale, data = df)
-  e2 = lm(log(damage) ~ femScale, data = df)
-
-# Present as table
-  stargazer(e1, e2, type = 'text', keep.stat = 'n')
-```
-
-```
-## 
-## =========================================
-##                  Dependent variable:     
-##              ----------------------------
-##              log(deaths + 1)  log(damage)
-##                    (1)            (2)    
-## -----------------------------------------
-## femScale          0.015          0.033   
-##                  (0.045)        (0.078)  
-##                                          
-## Constant         1.945***      6.950***  
-##                  (0.340)        (0.583)  
-##                                          
-## -----------------------------------------
-## Observations        92            92     
-## =========================================
-## Note:         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
-```
-
-=======
 &gt; Hurricane damage is associated with the "femininity" of the storm's name.
 
 - Appropriate test statistic, OLS regression 
@@ -1369,7 +914,6 @@ $$
   - TWO-sided test
   - Reject null if...
   
->>>>>>> 9d20796 (s23up)
 ]
 
 ---
@@ -1379,28 +923,18 @@ $$
 
 ### Setup
 ### Hypotheses
-<<<<<<< HEAD
-### Estimate
-### Interpret
-=======
 ### t-stats
 ### Reject?
->>>>>>> 9d20796 (s23up)
 
 ]
 .right-column[
 
-<<<<<<< HEAD
-We regressed hurricane deaths on the perceived femininity of 92 hurricanes making landfall in the US. We find that a one-point increase in femininity raises the average death toll by 1.5%. However, the effect is not significantly different from 0 `\((p=0.74)\)`.
-
-Note that this finding is robust to using damage as the outcome measure instead of deaths. Here we find mean damage increasing by about 3% with femininity, but the effect is not significantly different from 0 `\((p=0.67)\)`. 
-=======
-<div id="xkmumwzuau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<div id="fbmyvrkyeh" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
 <style>html {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
 }
 
-#xkmumwzuau .gt_table {
+#fbmyvrkyeh .gt_table {
   display: table;
   border-collapse: collapse;
   margin-left: auto;
@@ -1425,7 +959,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-left-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_heading {
+#fbmyvrkyeh .gt_heading {
   background-color: #FFFFFF;
   text-align: center;
   border-bottom-color: #FFFFFF;
@@ -1437,12 +971,12 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-right-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_caption {
+#fbmyvrkyeh .gt_caption {
   padding-top: 4px;
   padding-bottom: 4px;
 }
 
-#xkmumwzuau .gt_title {
+#fbmyvrkyeh .gt_title {
   color: #333333;
   font-size: 125%;
   font-weight: initial;
@@ -1454,7 +988,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-bottom-width: 0;
 }
 
-#xkmumwzuau .gt_subtitle {
+#fbmyvrkyeh .gt_subtitle {
   color: #333333;
   font-size: 85%;
   font-weight: initial;
@@ -1466,13 +1000,13 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-top-width: 0;
 }
 
-#xkmumwzuau .gt_bottom_border {
+#fbmyvrkyeh .gt_bottom_border {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_col_headings {
+#fbmyvrkyeh .gt_col_headings {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1487,7 +1021,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-right-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_col_heading {
+#fbmyvrkyeh .gt_col_heading {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1507,7 +1041,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   overflow-x: hidden;
 }
 
-#xkmumwzuau .gt_column_spanner_outer {
+#fbmyvrkyeh .gt_column_spanner_outer {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1519,15 +1053,15 @@ Note that this finding is robust to using damage as the outcome measure instead 
   padding-right: 4px;
 }
 
-#xkmumwzuau .gt_column_spanner_outer:first-child {
+#fbmyvrkyeh .gt_column_spanner_outer:first-child {
   padding-left: 0;
 }
 
-#xkmumwzuau .gt_column_spanner_outer:last-child {
+#fbmyvrkyeh .gt_column_spanner_outer:last-child {
   padding-right: 0;
 }
 
-#xkmumwzuau .gt_column_spanner {
+#fbmyvrkyeh .gt_column_spanner {
   border-bottom-style: solid;
   border-bottom-width: 2px;
   border-bottom-color: #D3D3D3;
@@ -1539,7 +1073,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   width: 100%;
 }
 
-#xkmumwzuau .gt_group_heading {
+#fbmyvrkyeh .gt_group_heading {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1565,7 +1099,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   text-align: left;
 }
 
-#xkmumwzuau .gt_empty_group_heading {
+#fbmyvrkyeh .gt_empty_group_heading {
   padding: 0.5px;
   color: #333333;
   background-color: #FFFFFF;
@@ -1580,15 +1114,15 @@ Note that this finding is robust to using damage as the outcome measure instead 
   vertical-align: middle;
 }
 
-#xkmumwzuau .gt_from_md > :first-child {
+#fbmyvrkyeh .gt_from_md > :first-child {
   margin-top: 0;
 }
 
-#xkmumwzuau .gt_from_md > :last-child {
+#fbmyvrkyeh .gt_from_md > :last-child {
   margin-bottom: 0;
 }
 
-#xkmumwzuau .gt_row {
+#fbmyvrkyeh .gt_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1607,7 +1141,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   overflow-x: hidden;
 }
 
-#xkmumwzuau .gt_stub {
+#fbmyvrkyeh .gt_stub {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1620,7 +1154,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   padding-right: 5px;
 }
 
-#xkmumwzuau .gt_stub_row_group {
+#fbmyvrkyeh .gt_stub_row_group {
   color: #333333;
   background-color: #FFFFFF;
   font-size: 100%;
@@ -1634,11 +1168,11 @@ Note that this finding is robust to using damage as the outcome measure instead 
   vertical-align: top;
 }
 
-#xkmumwzuau .gt_row_group_first td {
+#fbmyvrkyeh .gt_row_group_first td {
   border-top-width: 2px;
 }
 
-#xkmumwzuau .gt_summary_row {
+#fbmyvrkyeh .gt_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1648,16 +1182,16 @@ Note that this finding is robust to using damage as the outcome measure instead 
   padding-right: 5px;
 }
 
-#xkmumwzuau .gt_first_summary_row {
+#fbmyvrkyeh .gt_first_summary_row {
   border-top-style: solid;
   border-top-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_first_summary_row.thick {
+#fbmyvrkyeh .gt_first_summary_row.thick {
   border-top-width: 2px;
 }
 
-#xkmumwzuau .gt_last_summary_row {
+#fbmyvrkyeh .gt_last_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1667,7 +1201,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-bottom-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_grand_summary_row {
+#fbmyvrkyeh .gt_grand_summary_row {
   color: #333333;
   background-color: #FFFFFF;
   text-transform: inherit;
@@ -1677,7 +1211,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   padding-right: 5px;
 }
 
-#xkmumwzuau .gt_first_grand_summary_row {
+#fbmyvrkyeh .gt_first_grand_summary_row {
   padding-top: 8px;
   padding-bottom: 8px;
   padding-left: 5px;
@@ -1687,11 +1221,11 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-top-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_striped {
+#fbmyvrkyeh .gt_striped {
   background-color: rgba(128, 128, 128, 0.05);
 }
 
-#xkmumwzuau .gt_table_body {
+#fbmyvrkyeh .gt_table_body {
   border-top-style: solid;
   border-top-width: 2px;
   border-top-color: #D3D3D3;
@@ -1700,7 +1234,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-bottom-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_footnotes {
+#fbmyvrkyeh .gt_footnotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1714,7 +1248,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-right-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_footnote {
+#fbmyvrkyeh .gt_footnote {
   margin: 0px;
   font-size: 90%;
   padding-left: 4px;
@@ -1723,7 +1257,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   padding-right: 5px;
 }
 
-#xkmumwzuau .gt_sourcenotes {
+#fbmyvrkyeh .gt_sourcenotes {
   color: #333333;
   background-color: #FFFFFF;
   border-bottom-style: none;
@@ -1737,7 +1271,7 @@ Note that this finding is robust to using damage as the outcome measure instead 
   border-right-color: #D3D3D3;
 }
 
-#xkmumwzuau .gt_sourcenote {
+#fbmyvrkyeh .gt_sourcenote {
   font-size: 90%;
   padding-top: 4px;
   padding-bottom: 4px;
@@ -1745,64 +1279,64 @@ Note that this finding is robust to using damage as the outcome measure instead 
   padding-right: 5px;
 }
 
-#xkmumwzuau .gt_left {
+#fbmyvrkyeh .gt_left {
   text-align: left;
 }
 
-#xkmumwzuau .gt_center {
+#fbmyvrkyeh .gt_center {
   text-align: center;
 }
 
-#xkmumwzuau .gt_right {
+#fbmyvrkyeh .gt_right {
   text-align: right;
   font-variant-numeric: tabular-nums;
 }
 
-#xkmumwzuau .gt_font_normal {
+#fbmyvrkyeh .gt_font_normal {
   font-weight: normal;
 }
 
-#xkmumwzuau .gt_font_bold {
+#fbmyvrkyeh .gt_font_bold {
   font-weight: bold;
 }
 
-#xkmumwzuau .gt_font_italic {
+#fbmyvrkyeh .gt_font_italic {
   font-style: italic;
 }
 
-#xkmumwzuau .gt_super {
+#fbmyvrkyeh .gt_super {
   font-size: 65%;
 }
 
-#xkmumwzuau .gt_footnote_marks {
+#fbmyvrkyeh .gt_footnote_marks {
   font-style: italic;
   font-weight: normal;
   font-size: 75%;
   vertical-align: 0.4em;
 }
 
-#xkmumwzuau .gt_asterisk {
+#fbmyvrkyeh .gt_asterisk {
   font-size: 100%;
   vertical-align: 0;
 }
 
-#xkmumwzuau .gt_indent_1 {
+#fbmyvrkyeh .gt_indent_1 {
   text-indent: 5px;
 }
 
-#xkmumwzuau .gt_indent_2 {
+#fbmyvrkyeh .gt_indent_2 {
   text-indent: 10px;
 }
 
-#xkmumwzuau .gt_indent_3 {
+#fbmyvrkyeh .gt_indent_3 {
   text-indent: 15px;
 }
 
-#xkmumwzuau .gt_indent_4 {
+#fbmyvrkyeh .gt_indent_4 {
   text-indent: 20px;
 }
 
-#xkmumwzuau .gt_indent_5 {
+#fbmyvrkyeh .gt_indent_5 {
   text-indent: 25px;
 }
 </style>
@@ -2025,7 +1559,6 @@ Use data below to caluclate the `\(\chi^2\)` test statistic.
 ]
 
 .right-column[
->>>>>>> 9d20796 (s23up)
 
 ]
     </textarea>
