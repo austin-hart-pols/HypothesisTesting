@@ -39,6 +39,7 @@ class: center, middle, inverse, title-slide
 # Topics covered
 
 - Hypothesis testing  
+<<<<<<< HEAD
 
 - Meaning of a `\(p\)`-value  
 
@@ -47,6 +48,14 @@ class: center, middle, inverse, title-slide
   - `\(t\)`-test for difference of means
   - `\(F\)`-test for multiple group differences
   - `\(t\)`-test for regression coefficients
+=======
+  
+- Four implementations
+  - `\(t\)`-test for sample means
+  - `\(t\)`-test for difference of means
+  - `\(t\)`-test for regression coefficients
+  - `\(\chi^2\)`-test for tabular analysis
+>>>>>>> 9d20796 (s23up)
   
 - Jung et al (2014). "Female-named hurricanes" 
 
@@ -65,12 +74,13 @@ class: inverse, middle, right
 
 &gt; A method of inference that provides a basis for rejecting a hypothesis based on the plausibility of the data. 
 &gt;
-&gt; Typically for evaluating "significance" of an association observed in sample data.
+&gt; Typically for evaluating "statistical significance" of an association observed in sample data.
 
 
 ---
-# Testing procedure
+# Process for testing hypotheses
 
+<<<<<<< HEAD
 Given a sample statistic from your data:
 
 - Formalize competing hypotheses
@@ -80,33 +90,105 @@ Given a sample statistic from your data:
 - Calculate prob of the data given true null, `\(p = Pr(Sample~Stat | H_0)\)`  
 
 - Reject/Fail to reject null, typically when `\(p \leq 0.05\)`  
+=======
+&gt; Given a hypothesis about a population parameter, calculate the probability of finding your sample statistic.  
+&gt; Reject the hypothesis when probability is exceptionally low, typically below 0.05. 
+  
+Procedure:
+
+- Specify hypotheses
+  - Alternative: your expectation
+  - Null: mutually-exclusive opposite
+  
+- Select appropriate test statistic (e.g., Z-score) 
+  
+- Specify decision rule for rejecting null  
+  
+- Compute test statistic  
+  
+- Conclude
+
 
 
 ---
-# How is this possible?
+# Select the right test statistic
 
-&gt; Hypothesis testing is possible because of what we know about the sampling distribution of different sample statistics.
+&gt; A test statistic is a number that standardizes your sample information in light of the null hypothesis.  
+&gt; It expresses the deviation of the sample mean from the hypothesized parameter as a number of standard errors.
 
-- Pop parameters give shape to the sampling distribution
+For a sample mean, you might compute the `\(Z\)`-statistic:
 
+$$
+Z = \frac{\bar{y}-\mu_0}{s_y/\sqrt{n}}
+$$
+
+
+
+---
+# To reject or not to reject?
+
+### Set a decision rule for rejecting the null  
+
+
+- Choose a level of significance, typically `\(\alpha = 0.05\)`  
+  
+- Find the critical value, `\(Z^*\)`  
+   
+- Reject null if test statistic larger than critical value
+>>>>>>> 9d20796 (s23up)
+
+
+---
+# Finding your critical value, 5% significance
+
+.pull-left[
+### Upper-tailed test
+
+Null can only be wrong in one direction.
+
+<<<<<<< HEAD
 - Null an argument about parameters *AND, THEREFORE,* sampling dist
+=======
+&gt; Reject `\(H_0\)` if `\(Z &gt; 1.645\)`
+>>>>>>> 9d20796 (s23up)
 
-- Allows us to gauge probability of a sample stat
+&lt;img src="HypTestingSlides_files/figure-html/sclt1s-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+### Two-tailed test
+
+Null can be wrong in either direction.
+
+&gt; Reject `\(H_0\)` if `\(\lvert Z \rvert &gt; 1.96\)`
+
+&lt;img src="HypTestingSlides_files/figure-html/sclt2s-1.svg" style="display: block; margin: auto;" /&gt;
+]
 
 
 ---
 class: inverse, middle, right
 
-# THE ALL MIGHTY p-VALUE
-### Meaning and use
+# FOUR TESTS IN R
+
+### Using data from Jung et al. (2014)
+
+
 
 ---
-# The meaning of a p-value
+class: inverse
+# Population mean (t-test)
 
+<<<<<<< HEAD
 &gt; A p-value is the probability of observing a sample statistic under the assumption that the null hypothesis is true. 
+=======
+- I have data for ONE numeric variable.
+- I want to test hypotheses about a pop mean. `\(\mu_y\)`
+>>>>>>> 9d20796 (s23up)
 
 - Start with your sample statistic, e.g. `\(\bar{Y}=65\)`
 
+<<<<<<< HEAD
 - Measure distance to the hypothesized parameter `\(\mu_0 \leq 50\)`
 
 - Standardize wrt standard errors
@@ -135,16 +217,50 @@ $$
 - Gold standard of 0.05
   - Reject null when `\(p \leq 0.05\)`
   - Fail to reject when `\(p &gt; 0.05\)`
+=======
+---
+# Population mean (t-test)
 
+.left-column[
+### Setup
+]
+
+.right-column[
+&gt; On balance, hurricane names are more feminine than masculine. Use Jung et al's ratings to find out.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+>>>>>>> 9d20796 (s23up)
+
+]
 
 ---
-class: inverse, middle, right
+# Population mean (t-test)
 
+<<<<<<< HEAD
 # FOUR TESTS IN R
 
 ### Using "hurricanes.csv" from Jung et al. (2014)
+=======
+.left-column[
+### Setup
+### Hypotheses
+]
+>>>>>>> 9d20796 (s23up)
 
+.right-column[
+- `\(H_A:~\mu &gt; 5\)`
+  
+- `\(H_0:~\mu\leq 5\)`
 
+<<<<<<< HEAD
 ---
 # Every R script
 
@@ -364,10 +480,21 @@ The table below shows the relationship between hurricane-name gender and deaths 
    &lt;th style="text-align:right;"&gt; Med &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; Avg &lt;/th&gt;
    &lt;th style="text-align:right;"&gt; Avg (log) &lt;/th&gt;
+=======
+- Statistics from replication data:  
+
+&lt;table&gt;
+&lt;caption&gt;Sample Statistics&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Fem rating &lt;/th&gt;
+>>>>>>> 9d20796 (s23up)
   &lt;/tr&gt;
  &lt;/thead&gt;
 &lt;tbody&gt;
   &lt;tr&gt;
+<<<<<<< HEAD
    &lt;td style="text-align:left;"&gt; Female &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 65 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
@@ -375,16 +502,142 @@ The table below shows the relationship between hurricane-name gender and deaths 
    &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 57.4 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 2.2 &lt;/td&gt;
+=======
+   &lt;td style="text-align:left;"&gt; N &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 92.0 &lt;/td&gt;
+>>>>>>> 9d20796 (s23up)
   &lt;/tr&gt;
   &lt;tr&gt;
-   &lt;td style="text-align:left;"&gt; Male &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 29 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 0 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 84 &lt;/td&gt;
-   &lt;td style="text-align:right;"&gt; 5 &lt;/td&gt;
+   &lt;td style="text-align:left;"&gt; Mean &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; SD &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+# Population mean (t-test)
+
+.left-column[
+
+### Setup
+### Hypotheses
+### t-stats
+
+]
+
+.right-column[
+
+- Appropriate test statistic: 
+
+$$
+t=\frac{\bar{y}-\mu_0}{s_y/\sqrt{n}}
+$$
+  
+- Decision rule
+  - 5% significance
+  - One-sided test
+  - Reject null if...
+  
+]
+
+---
+# Population mean (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+### t-stats
+### Reject?
+]
+
+.right-column[
+
+- Calculate test statistic, `\(t\)`
+
+- Reject or not?
+
+&gt; I (reject/fail to reject) the null hypothesis. The mean score of 6.8 is (significantly/not significantly) ?? higher than 5 `\((t=??,~p??)\)`, meaning that hurricane names are (significantly/not) more feminine on balance.
+
+]
+
+
+---
+class: inverse
+# Difference of means (t-test)
+
+- I have:
+  - Numeric outcome variable
+  - Binary exposure variable
+
+- I want to know if the mean outcome differs by group
+
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+]
+
+.right-column[
+&gt; Female-named hurricanes deadlier than male-named hurricanes. Describe the relationship, and evaluate the claim.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+
+]
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+]
+
+.right-column[
+
+- `\(H_A: ~ \mu_{Fem} - \mu_{Male} &gt; 0\)`
+  
+- `\(H_0: ~ \mu_{Fem} - \mu_{Male} \leq 0\)`
+  
+- Summary stats from replication data:
+
+&lt;table&gt;
+&lt;caption&gt;Deaths by name&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Female &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Male &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 63.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mean &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.5 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 14.5 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 1.9 &lt;/td&gt;
   &lt;/tr&gt;
+<<<<<<< HEAD
 &lt;/tbody&gt;
 &lt;/table&gt;
 
@@ -466,9 +719,56 @@ The table below summarizes the relationship between the category of storm at lan
    &lt;td style="text-align:right;"&gt; 256.0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 717.0 &lt;/td&gt;
    &lt;td style="text-align:right;"&gt; 5.7 &lt;/td&gt;
+=======
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; SD &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.5 &lt;/td&gt;
+>>>>>>> 9d20796 (s23up)
   &lt;/tr&gt;
 &lt;/tbody&gt;
 &lt;/table&gt;
+
+]
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+### t-stats
+]
+
+.right-column[
+
+- Appropriate test statistic, difference of means
+
+$$
+t = \frac{(\bar{y_1}-\bar{y_2})-(\mu_1-\mu_2)}{\sqrt{s_1^2/n_1+s_2^2/n_2}}
+$$
+
+- Decision rule
+  - For 5% significance
+  - One-sided test
+  - Reject null if...
+]
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+### t-stats
+### Reject?
+]
+
+.right-column[
+
+
+]
+
 
 ---
 class: inverse
@@ -478,11 +778,18 @@ class: inverse
 - I have:
   - Numeric outcome variable
   - (typically) Numeric exposure variable
+<<<<<<< HEAD
 
 
 - I want to know if the mean outcome is related to level of exposure
 
 
+=======
+  
+- I want to know if the mean outcome is related to level of exposure
+
+
+>>>>>>> 9d20796 (s23up)
 ---
 # Testing regression coefficients
 
@@ -491,6 +798,7 @@ class: inverse
 ### Setup
 
 ]
+<<<<<<< HEAD
 
 .right-column[
 
@@ -501,6 +809,21 @@ class: inverse
 - Estimate the regression, eval the coefficient (t-test)
 
 - Present the results
+=======
+.right-column[
+
+&gt; Hurricane damage is correlated with the "femininity" of the storm's name.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+>>>>>>> 9d20796 (s23up)
 
 ]
 
@@ -513,6 +836,7 @@ class: inverse
 ### Hypotheses
 
 ]
+<<<<<<< HEAD
 
 .right-column[
 
@@ -522,6 +846,464 @@ Given PRF: `\(damage_i = \alpha + \beta(femScale_i) + e_i\)`
 - `\(H_A:~\beta \neq 0\)`
 
 - `\(H_0:~\beta = 0\)`
+=======
+.right-column[
+
+Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
+
+- `\(H_A:~ \beta_1 \neq 0\)`
+  
+- `\(H_0:~ \beta_1 = 0\)`
+
+- Regression estimates from replication data:
+
+<div id="mttxktvhgb" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#mttxktvhgb .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#mttxktvhgb .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#mttxktvhgb .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#mttxktvhgb .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#mttxktvhgb .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#mttxktvhgb .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#mttxktvhgb .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#mttxktvhgb .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#mttxktvhgb .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#mttxktvhgb .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#mttxktvhgb .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#mttxktvhgb .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#mttxktvhgb .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#mttxktvhgb .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mttxktvhgb .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#mttxktvhgb .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#mttxktvhgb .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mttxktvhgb .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#mttxktvhgb .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mttxktvhgb .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#mttxktvhgb .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mttxktvhgb .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#mttxktvhgb .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#mttxktvhgb .gt_left {
+  text-align: left;
+}
+
+#mttxktvhgb .gt_center {
+  text-align: center;
+}
+
+#mttxktvhgb .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#mttxktvhgb .gt_font_normal {
+  font-weight: normal;
+}
+
+#mttxktvhgb .gt_font_bold {
+  font-weight: bold;
+}
+
+#mttxktvhgb .gt_font_italic {
+  font-style: italic;
+}
+
+#mttxktvhgb .gt_super {
+  font-size: 65%;
+}
+
+#mttxktvhgb .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#mttxktvhgb .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#mttxktvhgb .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#mttxktvhgb .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#mttxktvhgb .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#mttxktvhgb .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#mttxktvhgb .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  &lt;caption class='gt_caption'&gt;Storm 'femininity' and consequences&lt;/caption&gt;
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Deaths">Deaths</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Damage">Damage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="" class="gt_row gt_left">Femininity of name</td>
+<td headers="Deaths" class="gt_row gt_center">1.39</td>
+<td headers="Damage" class="gt_row gt_center">-115.02</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Deaths" class="gt_row gt_center">(1.33)</td>
+<td headers="Damage" class="gt_row gt_center">(422.29)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Constant</td>
+<td headers="Deaths" class="gt_row gt_center">11.20</td>
+<td headers="Damage" class="gt_row gt_center">8049.73</td></tr>
+    <tr><td headers="" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Deaths" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(9.96)</td>
+<td headers="Damage" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(3168.02)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Num.Obs.</td>
+<td headers="Deaths" class="gt_row gt_center">92</td>
+<td headers="Damage" class="gt_row gt_center">92</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Note: OLS ests with std errors in parentheses.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+>>>>>>> 9d20796 (s23up)
 
 ]
 
@@ -532,12 +1314,17 @@ Given PRF: `\(damage_i = \alpha + \beta(femScale_i) + e_i\)`
 
 ### Setup
 ### Hypotheses
+<<<<<<< HEAD
 ### Estimate
+=======
+### t-stats
+>>>>>>> 9d20796 (s23up)
 
 ]
 
 .right-column[
 
+<<<<<<< HEAD
 
 ```r
 # Estimate and store
@@ -568,6 +1355,21 @@ Given PRF: `\(damage_i = \alpha + \beta(femScale_i) + e_i\)`
 ## Note:         *p&lt;0.1; **p&lt;0.05; ***p&lt;0.01
 ```
 
+=======
+&gt; Hurricane damage is associated with the "femininity" of the storm's name.
+
+- Appropriate test statistic, OLS regression 
+
+$$
+t=\frac{b_1 - \beta_1}{SE_b}
+$$
+  
+- Decision rule
+  - For 5% significance
+  - TWO-sided test
+  - Reject null if...
+  
+>>>>>>> 9d20796 (s23up)
 ]
 
 ---
@@ -577,15 +1379,653 @@ Given PRF: `\(damage_i = \alpha + \beta(femScale_i) + e_i\)`
 
 ### Setup
 ### Hypotheses
+<<<<<<< HEAD
 ### Estimate
 ### Interpret
+=======
+### t-stats
+### Reject?
+>>>>>>> 9d20796 (s23up)
 
 ]
 .right-column[
 
+<<<<<<< HEAD
 We regressed hurricane deaths on the perceived femininity of 92 hurricanes making landfall in the US. We find that a one-point increase in femininity raises the average death toll by 1.5%. However, the effect is not significantly different from 0 `\((p=0.74)\)`.
 
 Note that this finding is robust to using damage as the outcome measure instead of deaths. Here we find mean damage increasing by about 3% with femininity, but the effect is not significantly different from 0 `\((p=0.67)\)`. 
+=======
+<div id="xkmumwzuau" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#xkmumwzuau .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#xkmumwzuau .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#xkmumwzuau .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#xkmumwzuau .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#xkmumwzuau .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#xkmumwzuau .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#xkmumwzuau .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#xkmumwzuau .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#xkmumwzuau .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#xkmumwzuau .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#xkmumwzuau .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#xkmumwzuau .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#xkmumwzuau .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#xkmumwzuau .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xkmumwzuau .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#xkmumwzuau .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#xkmumwzuau .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xkmumwzuau .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#xkmumwzuau .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xkmumwzuau .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#xkmumwzuau .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xkmumwzuau .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#xkmumwzuau .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#xkmumwzuau .gt_left {
+  text-align: left;
+}
+
+#xkmumwzuau .gt_center {
+  text-align: center;
+}
+
+#xkmumwzuau .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#xkmumwzuau .gt_font_normal {
+  font-weight: normal;
+}
+
+#xkmumwzuau .gt_font_bold {
+  font-weight: bold;
+}
+
+#xkmumwzuau .gt_font_italic {
+  font-style: italic;
+}
+
+#xkmumwzuau .gt_super {
+  font-size: 65%;
+}
+
+#xkmumwzuau .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#xkmumwzuau .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#xkmumwzuau .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#xkmumwzuau .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#xkmumwzuau .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#xkmumwzuau .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#xkmumwzuau .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  &lt;caption class='gt_caption'&gt;Storm 'femininity' and consequences&lt;/caption&gt;
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Deaths">Deaths</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Damage">Damage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="" class="gt_row gt_left">Femininity of name</td>
+<td headers="Deaths" class="gt_row gt_center">1.39</td>
+<td headers="Damage" class="gt_row gt_center">-115.02</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Deaths" class="gt_row gt_center">(1.33)</td>
+<td headers="Damage" class="gt_row gt_center">(422.29)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Constant</td>
+<td headers="Deaths" class="gt_row gt_center">11.20</td>
+<td headers="Damage" class="gt_row gt_center">8049.73</td></tr>
+    <tr><td headers="" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Deaths" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(9.96)</td>
+<td headers="Damage" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(3168.02)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Num.Obs.</td>
+<td headers="Deaths" class="gt_row gt_center">92</td>
+<td headers="Damage" class="gt_row gt_center">92</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Note: OLS ests with std errors in parentheses.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+
+]
+
+---
+class: inverse
+
+# Tabular analysis `\((\chi^2)\)`
+
+- I have:
+  - Nominal outcome variable
+  - Nominal exposure variable
+  
+- I want to know if the outcome and exposure variable are independent
+
+
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+]
+
+.right-column[
+&gt; Development of female characters differs pre vs post 1990. Bechdel data.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+
+]
+
+
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+]
+
+
+.right-column[
+
+- `\(H_0:\)` Representation is independent of era
+  
+- `\(H_A:\)` Representation differs by era
+
+- Tabulation in sample:
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Bechdel over time&lt;/caption&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #00000020; padding-bottom: 5px; "&gt;1970-1990&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #00000020; padding-bottom: 5px; "&gt;1991-2013&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; % &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; % &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; FAIL &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 61.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 730 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45.6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PASS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 38.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 870 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54.4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1600 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+ 
+ 
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+### chi-squared stats
+]
+
+.right-column[
+
+- Appropriate test statistic
+
+$$
+\chi^2_{df} = \sum \frac{(O-E)^2}{E}
+$$
+  - `\(O=\)` frequency in each cell
+    
+  - `\(E=\frac{row.total}{grand.total}*col.total\)`
+    
+  - `\(df=(x.cats-1)*(y.cats-1)\)`
+  
+- Decision rule
+  - For 5% significance
+  - Reject null if...
+]
+  
+  
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+### chi-squared stats
+]
+
+.right-column[
+
+Use data below to caluclate the `\(\chi^2\)` test statistic.
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Bechdel over time&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; BechdelBinary &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 1970-1990 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 1991-2013 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; FAIL &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 730 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 849 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PASS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 870 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 945 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1600 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1794 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+### chi-squared stats
+### Reject?
+]
+
+.right-column[
+>>>>>>> 9d20796 (s23up)
 
 ]
     </textarea>
@@ -594,7 +2034,8 @@ Note that this finding is robust to using damage as the outcome measure instead 
 <script>var slideshow = remark.create({
 "highlightStyle": "github",
 "highlightLines": true,
-"countIncrementalSlides": false
+"countIncrementalSlides": false,
+"ratio": "16:9"
 });
 if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
   window.dispatchEvent(new Event('resize'));
