@@ -46,7 +46,7 @@ mov = mov %>%
   - $t$-test for regression coefficients
   - $\chi^2$-test for tabular analysis
   
-- Jung et al (2014). "Female-named hurricanes" 
+- Jung et al (2014). "Female-named hurricanes"  
 
 
 ---
