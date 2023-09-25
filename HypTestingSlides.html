@@ -1,0 +1,1707 @@
+<!DOCTYPE html>
+<html lang="" xml:lang="">
+  <head>
+    <title>HYPOTHESIS TESTING</title>
+    <meta charset="utf-8" />
+    <meta name="author" content="Austin Hart" />
+    <script src="libs/header-attrs/header-attrs.js"></script>
+    <link href="libs/remark-css/default.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies.css" rel="stylesheet" />
+    <link href="libs/remark-css/rladies-fonts.css" rel="stylesheet" />
+    <script src="libs/kePrint/kePrint.js"></script>
+    <link href="libs/lightable/lightable.css" rel="stylesheet" />
+  </head>
+  <body>
+    <textarea id="source">
+class: center, middle, inverse, title-slide
+
+.title[
+# HYPOTHESIS TESTING
+]
+.subtitle[
+## 4 tests in action
+]
+.author[
+### Austin Hart
+]
+.institute[
+### American University
+]
+
+---
+
+
+
+
+
+
+
+&lt;style type="text/css"&gt;
+.remark-slide-content {
+    font-size: 25px;
+    padding: 1em 4em 1em 4em;
+}
+&lt;/style&gt;
+
+# Hypothesis testing
+
+&gt; A method of inference that provides a basis for rejecting a hypothesis based on the plausibility of the data. 
+&gt;
+&gt; Typically for evaluating "statistical significance" of an association observed in sample data. 
+  
+- Four implementations
+  - `\(t\)`-test for sample means
+  - `\(t\)`-test for difference of means
+  - `\(t\)`-test for regression coefficients
+  - `\(\chi^2\)`-test for tabular analysis
+  
+- EX: Jung et al (2014). "Female-named hurricanes"  
+
+
+---
+# Terms to know
+
+- Level of significance `\(\alpha\)`: probability of Type-I error  
+
+- p-value: probability of a sample statistic given a true null  
+
+- Statistically significant: unlikely to have occurred by chance alone (given a true null)  
+
+- Alternative hypothesis, `\(H_A\)`: your expectation about a characteristic of the population  
+
+- Null hypothesis, `\(H_0\)`: the opposite of `\(H_A\)`. Status quo expectation.
+
+
+---
+# Hypothesis testing procedure
+
+1. Specify hypotheses
+
+2. Set criteria for rejecting the null
+
+3. Compute test statistic  
+
+3. Conclude
+
+
+---
+# Setting up hypotheses
+
+- **Alternative hypothesis,** `\(H_A\)`
+  - Your expectation of the population/truth
+  - Or the empirical implication of your theory
+
+- **Null hypothesis,** `\(H_0\)`
+  - Logical opposite of `\(H_A\)`
+  - Status quo expectation: you've found nothing new
+
+- TIPS
+  - ALWAYS frame hypotheses in terms of parameters
+  - Science is all about the null. 
+  
+  
+---
+# Select the right test statistic
+
+&gt; A test statistic is a number that summarizes how far your sample information is from the parameter value in the null hypothesis.  
+
+- Sample proportion: `\(Z\)` statistic
+- `\(t\)` statistic for
+  - sample mean
+  - difference of means
+  - OLS regression coefficient
+- Tabular analysis: `\(\chi^2\)`
+
+
+
+---
+# To reject or not to reject?
+
+### Set a decision rule for rejecting the null  
+
+- Choose a level of significance, typically `\(\alpha = 0.05\)`  
+
+- Find the critical value for your test statistic, e.g., `\(t_{\alpha/2}\)`
+
+- Reject null if `\(t \geq t_{\alpha/2}\)`
+
+
+
+---
+# Finding your critical value, 5% significance
+
+.pull-left[
+### Upper-tailed test
+
+Reject `\(H_0\)` if `\(t &gt; 1.645\)`
+
+&lt;img src="HypTestingSlides_files/figure-html/sclt1s-1.svg" style="display: block; margin: auto;" /&gt;
+
+]
+.pull-right[
+### Two-tailed test
+
+Reject `\(H_0\)` if `\(\lvert t \rvert &gt; 1.96\)`
+
+
+&lt;img src="HypTestingSlides_files/figure-html/sclt2s-1.svg" style="display: block; margin: auto;" /&gt;
+]
+
+
+---
+class: inverse, middle, right
+
+# FOUR HYPOTHESIS TESTS
+
+### Using data from Jung et al. (2014)
+
+
+
+---
+class: inverse
+# Population mean (t-test)
+
+- I have data for ONE numeric variable.
+- I want to test hypotheses about a pop mean. `\(\mu_y\)`
+
+
+---
+# Population mean (t-test)
+
+.left-column[
+### Setup
+]
+
+.right-column[
+&gt; On balance, hurricane names are more feminine than masculine. Use Jung et al's ratings to find out.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+
+]
+
+---
+# Population mean (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+]
+
+.right-column[
+- `\(H_A:~\mu &gt; 6\)`
+  
+- `\(H_0:~\mu\leq 6\)`
+
+- Statistics from replication data:  
+
+&lt;table&gt;
+&lt;caption&gt;Sample Statistics&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; Stat &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Fem rating &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; N &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 92.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mean &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 6.8 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; SD &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 3.2 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+# Population mean (t-test)
+
+.left-column[
+
+### Setup
+### Hypotheses
+### t-stats
+
+]
+
+.right-column[
+
+- Appropriate test statistic: 
+
+$$
+t=\frac{\bar{y}-\mu_0}{s_y/\sqrt{n}}
+$$
+  
+- Decision rule
+  - 5% significance
+  - One-sided test
+  - Reject null if...
+  
+]
+
+---
+# Population mean (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+### t-stats
+### Reject?
+]
+
+.right-column[
+
+- Calculate test statistic, `\(t\)`
+
+- Reject or not?
+
+&gt; I reject the null. The mean rating is significantly higher than 6 `\((t=2.4)\)`, meaning that hurricane names are significantly more feminine on balance.
+
+]
+
+
+---
+class: inverse
+# Difference of means (t-test)
+
+- I have:
+  - Numeric outcome variable
+  - Binary exposure variable
+
+- I want to know if the mean outcome differs by group
+
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+]
+
+.right-column[
+&gt; Female-named hurricanes deadlier than male-named hurricanes. Describe the relationship, and evaluate the claim.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+
+]
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+]
+
+.right-column[
+
+- `\(H_A: ~ \mu_{Fem} - \mu_{Male} &gt; 0\)`
+  
+- `\(H_0: ~ \mu_{Fem} - \mu_{Male} \leq 0\)`
+  
+- Summary stats from replication data:
+
+&lt;table&gt;
+&lt;caption&gt;Deaths by name&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Female &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Male &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; n &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 63.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 29.0 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Mean &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 23.5 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 14.5 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; SD &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 47.1 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 21.5 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+### t-stats
+]
+
+.right-column[
+
+- Appropriate test statistic, difference of means
+
+$$
+t = \frac{(\bar{y_1}-\bar{y_2})-(\mu_1-\mu_2)}{\sqrt{s_1^2/n_1+s_2^2/n_2}}
+$$
+
+- Decision rule
+  - For 5% significance
+  - One-sided test
+  - Reject null if...
+]
+
+---
+# Difference of means (t-test)
+
+.left-column[
+### Setup
+### Hypotheses
+### t-stats
+### Reject?
+]
+
+.right-column[
+
+
+]
+
+
+---
+class: inverse
+
+# Regression
+
+- I have:
+  - Numeric outcome variable
+  - (typically) Numeric exposure variable
+  
+- I want to know if the mean outcome is related to level of exposure
+
+
+---
+# Testing regression coefficients
+
+.left-column[
+
+### Setup
+
+]
+.right-column[
+
+&gt; Hurricane damage is correlated with the "femininity" of the storm's name.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+
+]
+
+---
+# Testing regression coefficients
+
+.left-column[
+
+### Setup
+### Hypotheses
+
+]
+.right-column[
+
+Given linear model: `\(damage_i = \beta_0 + \beta_1(femScale_i) + e_i\)`
+
+- `\(H_0:~ \beta_1 = 0\)`, `\(H_A:~ \beta_1 \neq 0\)`
+
+- Regression estimates from replication data:
+
+<div id="gkrzfmbded" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#gkrzfmbded .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#gkrzfmbded .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#gkrzfmbded .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#gkrzfmbded .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#gkrzfmbded .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#gkrzfmbded .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#gkrzfmbded .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#gkrzfmbded .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#gkrzfmbded .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#gkrzfmbded .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#gkrzfmbded .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#gkrzfmbded .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#gkrzfmbded .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#gkrzfmbded .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gkrzfmbded .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#gkrzfmbded .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#gkrzfmbded .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gkrzfmbded .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#gkrzfmbded .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gkrzfmbded .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#gkrzfmbded .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gkrzfmbded .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#gkrzfmbded .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#gkrzfmbded .gt_left {
+  text-align: left;
+}
+
+#gkrzfmbded .gt_center {
+  text-align: center;
+}
+
+#gkrzfmbded .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#gkrzfmbded .gt_font_normal {
+  font-weight: normal;
+}
+
+#gkrzfmbded .gt_font_bold {
+  font-weight: bold;
+}
+
+#gkrzfmbded .gt_font_italic {
+  font-style: italic;
+}
+
+#gkrzfmbded .gt_super {
+  font-size: 65%;
+}
+
+#gkrzfmbded .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#gkrzfmbded .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#gkrzfmbded .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#gkrzfmbded .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#gkrzfmbded .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#gkrzfmbded .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#gkrzfmbded .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  &lt;caption class='gt_caption'&gt;Storm 'femininity' and consequences&lt;/caption&gt;
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Deaths">Deaths</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Damage">Damage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="" class="gt_row gt_left">Femininity of name</td>
+<td headers="Deaths" class="gt_row gt_center">1.39</td>
+<td headers="Damage" class="gt_row gt_center">-115.02</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Deaths" class="gt_row gt_center">(1.33)</td>
+<td headers="Damage" class="gt_row gt_center">(422.29)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Constant</td>
+<td headers="Deaths" class="gt_row gt_center">11.20</td>
+<td headers="Damage" class="gt_row gt_center">8049.73</td></tr>
+    <tr><td headers="" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Deaths" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(9.96)</td>
+<td headers="Damage" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(3168.02)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Num.Obs.</td>
+<td headers="Deaths" class="gt_row gt_center">92</td>
+<td headers="Damage" class="gt_row gt_center">92</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Note: OLS ests with std errors in parentheses.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+
+]
+
+---
+# Testing regression coefficients
+
+.left-column[
+
+### Setup
+### Hypotheses
+### t-stats
+
+]
+
+.right-column[
+
+&gt; Hurricane damage is associated with the "femininity" of the storm's name.
+
+- Appropriate test statistic, OLS regression 
+
+$$
+t=\frac{b_1 - \beta_1}{SE_b}
+$$
+  
+- Decision rule
+  - For 5% significance
+  - TWO-sided test
+  - Reject null if...
+  
+]
+
+---
+# Testing regression coefficients
+
+.left-column[
+
+### Setup
+### Hypotheses
+### t-stats
+### Reject?
+
+]
+.right-column[
+
+<div id="amyibqweop" style="padding-left:0px;padding-right:0px;padding-top:10px;padding-bottom:10px;overflow-x:auto;overflow-y:auto;width:auto;height:auto;">
+<style>html {
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, 'Helvetica Neue', 'Fira Sans', 'Droid Sans', Arial, sans-serif;
+}
+
+#amyibqweop .gt_table {
+  display: table;
+  border-collapse: collapse;
+  margin-left: auto;
+  margin-right: auto;
+  color: #333333;
+  font-size: 16px;
+  font-weight: normal;
+  font-style: normal;
+  background-color: #FFFFFF;
+  width: auto;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #A8A8A8;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #A8A8A8;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+}
+
+#amyibqweop .gt_heading {
+  background-color: #FFFFFF;
+  text-align: center;
+  border-bottom-color: #FFFFFF;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#amyibqweop .gt_caption {
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+#amyibqweop .gt_title {
+  color: #333333;
+  font-size: 125%;
+  font-weight: initial;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-color: #FFFFFF;
+  border-bottom-width: 0;
+}
+
+#amyibqweop .gt_subtitle {
+  color: #333333;
+  font-size: 85%;
+  font-weight: initial;
+  padding-top: 0;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-color: #FFFFFF;
+  border-top-width: 0;
+}
+
+#amyibqweop .gt_bottom_border {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#amyibqweop .gt_col_headings {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+}
+
+#amyibqweop .gt_col_heading {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 6px;
+  padding-left: 5px;
+  padding-right: 5px;
+  overflow-x: hidden;
+}
+
+#amyibqweop .gt_column_spanner_outer {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: normal;
+  text-transform: inherit;
+  padding-top: 0;
+  padding-bottom: 0;
+  padding-left: 4px;
+  padding-right: 4px;
+}
+
+#amyibqweop .gt_column_spanner_outer:first-child {
+  padding-left: 0;
+}
+
+#amyibqweop .gt_column_spanner_outer:last-child {
+  padding-right: 0;
+}
+
+#amyibqweop .gt_column_spanner {
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: bottom;
+  padding-top: 5px;
+  padding-bottom: 5px;
+  overflow-x: hidden;
+  display: inline-block;
+  width: 100%;
+}
+
+#amyibqweop .gt_group_heading {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  text-align: left;
+}
+
+#amyibqweop .gt_empty_group_heading {
+  padding: 0.5px;
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  vertical-align: middle;
+}
+
+#amyibqweop .gt_from_md > :first-child {
+  margin-top: 0;
+}
+
+#amyibqweop .gt_from_md > :last-child {
+  margin-bottom: 0;
+}
+
+#amyibqweop .gt_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  margin: 10px;
+  border-top-style: solid;
+  border-top-width: 1px;
+  border-top-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 1px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 1px;
+  border-right-color: #D3D3D3;
+  vertical-align: middle;
+  overflow-x: hidden;
+}
+
+#amyibqweop .gt_stub {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#amyibqweop .gt_stub_row_group {
+  color: #333333;
+  background-color: #FFFFFF;
+  font-size: 100%;
+  font-weight: initial;
+  text-transform: inherit;
+  border-right-style: solid;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+  padding-left: 5px;
+  padding-right: 5px;
+  vertical-align: top;
+}
+
+#amyibqweop .gt_row_group_first td {
+  border-top-width: 2px;
+}
+
+#amyibqweop .gt_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#amyibqweop .gt_first_summary_row {
+  border-top-style: solid;
+  border-top-color: #D3D3D3;
+}
+
+#amyibqweop .gt_first_summary_row.thick {
+  border-top-width: 2px;
+}
+
+#amyibqweop .gt_last_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#amyibqweop .gt_grand_summary_row {
+  color: #333333;
+  background-color: #FFFFFF;
+  text-transform: inherit;
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#amyibqweop .gt_first_grand_summary_row {
+  padding-top: 8px;
+  padding-bottom: 8px;
+  padding-left: 5px;
+  padding-right: 5px;
+  border-top-style: double;
+  border-top-width: 6px;
+  border-top-color: #D3D3D3;
+}
+
+#amyibqweop .gt_striped {
+  background-color: rgba(128, 128, 128, 0.05);
+}
+
+#amyibqweop .gt_table_body {
+  border-top-style: solid;
+  border-top-width: 2px;
+  border-top-color: #D3D3D3;
+  border-bottom-style: solid;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+}
+
+#amyibqweop .gt_footnotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#amyibqweop .gt_footnote {
+  margin: 0px;
+  font-size: 90%;
+  padding-left: 4px;
+  padding-right: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#amyibqweop .gt_sourcenotes {
+  color: #333333;
+  background-color: #FFFFFF;
+  border-bottom-style: none;
+  border-bottom-width: 2px;
+  border-bottom-color: #D3D3D3;
+  border-left-style: none;
+  border-left-width: 2px;
+  border-left-color: #D3D3D3;
+  border-right-style: none;
+  border-right-width: 2px;
+  border-right-color: #D3D3D3;
+}
+
+#amyibqweop .gt_sourcenote {
+  font-size: 90%;
+  padding-top: 4px;
+  padding-bottom: 4px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+#amyibqweop .gt_left {
+  text-align: left;
+}
+
+#amyibqweop .gt_center {
+  text-align: center;
+}
+
+#amyibqweop .gt_right {
+  text-align: right;
+  font-variant-numeric: tabular-nums;
+}
+
+#amyibqweop .gt_font_normal {
+  font-weight: normal;
+}
+
+#amyibqweop .gt_font_bold {
+  font-weight: bold;
+}
+
+#amyibqweop .gt_font_italic {
+  font-style: italic;
+}
+
+#amyibqweop .gt_super {
+  font-size: 65%;
+}
+
+#amyibqweop .gt_footnote_marks {
+  font-style: italic;
+  font-weight: normal;
+  font-size: 75%;
+  vertical-align: 0.4em;
+}
+
+#amyibqweop .gt_asterisk {
+  font-size: 100%;
+  vertical-align: 0;
+}
+
+#amyibqweop .gt_indent_1 {
+  text-indent: 5px;
+}
+
+#amyibqweop .gt_indent_2 {
+  text-indent: 10px;
+}
+
+#amyibqweop .gt_indent_3 {
+  text-indent: 15px;
+}
+
+#amyibqweop .gt_indent_4 {
+  text-indent: 20px;
+}
+
+#amyibqweop .gt_indent_5 {
+  text-indent: 25px;
+}
+</style>
+<table class="gt_table">
+  &lt;caption class='gt_caption'&gt;Storm 'femininity' and consequences&lt;/caption&gt;
+  
+  <thead class="gt_col_headings">
+    <tr>
+      <th class="gt_col_heading gt_columns_bottom_border gt_left" rowspan="1" colspan="1" scope="col" id=" "> </th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Deaths">Deaths</th>
+      <th class="gt_col_heading gt_columns_bottom_border gt_center" rowspan="1" colspan="1" scope="col" id="Damage">Damage</th>
+    </tr>
+  </thead>
+  <tbody class="gt_table_body">
+    <tr><td headers="" class="gt_row gt_left">Femininity of name</td>
+<td headers="Deaths" class="gt_row gt_center">1.39</td>
+<td headers="Damage" class="gt_row gt_center">-115.02</td></tr>
+    <tr><td headers="" class="gt_row gt_left"></td>
+<td headers="Deaths" class="gt_row gt_center">(1.33)</td>
+<td headers="Damage" class="gt_row gt_center">(422.29)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Constant</td>
+<td headers="Deaths" class="gt_row gt_center">11.20</td>
+<td headers="Damage" class="gt_row gt_center">8049.73</td></tr>
+    <tr><td headers="" class="gt_row gt_left" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;"></td>
+<td headers="Deaths" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(9.96)</td>
+<td headers="Damage" class="gt_row gt_center" style="border-bottom-width: 1px; border-bottom-style: solid; border-bottom-color: #000000;">(3168.02)</td></tr>
+    <tr><td headers="" class="gt_row gt_left">Num.Obs.</td>
+<td headers="Deaths" class="gt_row gt_center">92</td>
+<td headers="Damage" class="gt_row gt_center">92</td></tr>
+  </tbody>
+  <tfoot class="gt_sourcenotes">
+    <tr>
+      <td class="gt_sourcenote" colspan="3">Note: OLS ests with std errors in parentheses.</td>
+    </tr>
+  </tfoot>
+  
+</table>
+</div>
+
+]
+
+---
+class: inverse
+
+# Tabular analysis `\((\chi^2)\)`
+
+- I have:
+  - Nominal outcome variable
+  - Nominal exposure variable
+  
+- I want to know if the outcome and exposure variable are independent
+
+
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+]
+
+.right-column[
+&gt; Development of female characters differs pre vs post 1990. Bechdel data.
+
+- State hypotheses
+  
+- Identify test statistic
+  
+- Set decision rule
+  
+- Calculate test statistic
+  
+- Reject/fail to reject the null
+
+]
+
+
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+]
+
+
+.right-column[
+
+- `\(H_0:\)` Representation is independent of era
+  
+- `\(H_A:\)` Representation differs by era
+
+- Tabulation in sample:
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Bechdel over time&lt;/caption&gt;
+ &lt;thead&gt;
+&lt;tr&gt;
+&lt;th style="empty-cells: hide;" colspan="1"&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #00000020; padding-bottom: 5px; "&gt;1970-1990&lt;/div&gt;&lt;/th&gt;
+&lt;th style="padding-bottom:0; padding-left:3px;padding-right:3px;text-align: center; " colspan="2"&gt;&lt;div style="border-bottom: 1px solid #00000020; padding-bottom: 5px; "&gt;1991-2013&lt;/div&gt;&lt;/th&gt;
+&lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt;   &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; % &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; n &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; % &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; FAIL &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 61.3 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 730 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 45.6 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PASS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 38.7 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 870 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 54.4 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.0 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1600 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 100.0 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+
+]
+ 
+ 
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+### chi-squared stats
+]
+
+.right-column[
+
+- Appropriate test statistic
+
+$$
+\chi^2_{df} = \sum \frac{(O-E)^2}{E}
+$$
+  - `\(O=\)` frequency in each cell
+    
+  - `\(E=\frac{row.total}{grand.total}*col.total\)`
+    
+  - `\(df=(x.cats-1)*(y.cats-1)\)`
+  
+- Decision rule
+  - For 5% significance
+  - Reject null if...
+]
+  
+  
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+### chi-squared stats
+]
+
+.right-column[
+
+Use data below to caluclate the `\(\chi^2\)` test statistic.
+
+&lt;table class=" lightable-paper" style='font-family: "Arial Narrow", arial, helvetica, sans-serif; width: auto !important; margin-left: auto; margin-right: auto;'&gt;
+&lt;caption&gt;Bechdel over time&lt;/caption&gt;
+ &lt;thead&gt;
+  &lt;tr&gt;
+   &lt;th style="text-align:left;"&gt; BechdelBinary &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 1970-1990 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; 1991-2013 &lt;/th&gt;
+   &lt;th style="text-align:right;"&gt; Total &lt;/th&gt;
+  &lt;/tr&gt;
+ &lt;/thead&gt;
+&lt;tbody&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; FAIL &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 119 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 730 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 849 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; PASS &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 75 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 870 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 945 &lt;/td&gt;
+  &lt;/tr&gt;
+  &lt;tr&gt;
+   &lt;td style="text-align:left;"&gt; Total &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 194 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1600 &lt;/td&gt;
+   &lt;td style="text-align:right;"&gt; 1794 &lt;/td&gt;
+  &lt;/tr&gt;
+&lt;/tbody&gt;
+&lt;/table&gt;
+]
+
+---
+# Tabular analysis
+
+.left-column[
+### Setup
+### Hypotheses
+### chi-squared stats
+### Reject?
+]
+
+.right-column[
+
+]
+    </textarea>
+<style data-target="print-only">@media screen {.remark-slide-container{display:block;}.remark-slide-scaler{box-shadow:none;}}</style>
+<script src="https://remarkjs.com/downloads/remark-latest.min.js"></script>
+<script>var slideshow = remark.create({
+"highlightStyle": "github",
+"highlightLines": true,
+"countIncrementalSlides": false,
+"ratio": "16:9"
+});
+if (window.HTMLWidgets) slideshow.on('afterShowSlide', function (slide) {
+  window.dispatchEvent(new Event('resize'));
+});
+(function(d) {
+  var s = d.createElement("style"), r = d.querySelector(".remark-slide-scaler");
+  if (!r) return;
+  s.type = "text/css"; s.innerHTML = "@page {size: " + r.style.width + " " + r.style.height +"; }";
+  d.head.appendChild(s);
+})(document);
+
+(function(d) {
+  var el = d.getElementsByClassName("remark-slides-area");
+  if (!el) return;
+  var slide, slides = slideshow.getSlides(), els = el[0].children;
+  for (var i = 1; i < slides.length; i++) {
+    slide = slides[i];
+    if (slide.properties.continued === "true" || slide.properties.count === "false") {
+      els[i - 1].className += ' has-continuation';
+    }
+  }
+  var s = d.createElement("style");
+  s.type = "text/css"; s.innerHTML = "@media print { .has-continuation { display: none; } }";
+  d.head.appendChild(s);
+})(document);
+// delete the temporary CSS (for displaying all slides initially) when the user
+// starts to view slides
+(function() {
+  var deleted = false;
+  slideshow.on('beforeShowSlide', function(slide) {
+    if (deleted) return;
+    var sheets = document.styleSheets, node;
+    for (var i = 0; i < sheets.length; i++) {
+      node = sheets[i].ownerNode;
+      if (node.dataset["target"] !== "print-only") continue;
+      node.parentNode.removeChild(node);
+    }
+    deleted = true;
+  });
+})();
+// add `data-at-shortcutkeys` attribute to <body> to resolve conflicts with JAWS
+// screen reader (see PR #262)
+(function(d) {
+  let res = {};
+  d.querySelectorAll('.remark-help-content table tr').forEach(tr => {
+    const t = tr.querySelector('td:nth-child(2)').innerText;
+    tr.querySelectorAll('td:first-child .key').forEach(key => {
+      const k = key.innerText;
+      if (/^[a-z]$/.test(k)) res[k] = t;  // must be a single letter (key)
+    });
+  });
+  d.body.setAttribute('data-at-shortcutkeys', JSON.stringify(res));
+})(document);
+(function() {
+  "use strict"
+  // Replace <script> tags in slides area to make them executable
+  var scripts = document.querySelectorAll(
+    '.remark-slides-area .remark-slide-container script'
+  );
+  if (!scripts.length) return;
+  for (var i = 0; i < scripts.length; i++) {
+    var s = document.createElement('script');
+    var code = document.createTextNode(scripts[i].textContent);
+    s.appendChild(code);
+    var scriptAttrs = scripts[i].attributes;
+    for (var j = 0; j < scriptAttrs.length; j++) {
+      s.setAttribute(scriptAttrs[j].name, scriptAttrs[j].value);
+    }
+    scripts[i].parentElement.replaceChild(s, scripts[i]);
+  }
+})();
+(function() {
+  var links = document.getElementsByTagName('a');
+  for (var i = 0; i < links.length; i++) {
+    if (/^(https?:)?\/\//.test(links[i].getAttribute('href'))) {
+      links[i].target = '_blank';
+    }
+  }
+})();
+// adds .remark-code-has-line-highlighted class to <pre> parent elements
+// of code chunks containing highlighted lines with class .remark-code-line-highlighted
+(function(d) {
+  const hlines = d.querySelectorAll('.remark-code-line-highlighted');
+  const preParents = [];
+  const findPreParent = function(line, p = 0) {
+    if (p > 1) return null; // traverse up no further than grandparent
+    const el = line.parentElement;
+    return el.tagName === "PRE" ? el : findPreParent(el, ++p);
+  };
+
+  for (let line of hlines) {
+    let pre = findPreParent(line);
+    if (pre && !preParents.includes(pre)) preParents.push(pre);
+  }
+  preParents.forEach(p => p.classList.add("remark-code-has-line-highlighted"));
+})(document);</script>
+
+<script>
+slideshow._releaseMath = function(el) {
+  var i, text, code, codes = el.getElementsByTagName('code');
+  for (i = 0; i < codes.length;) {
+    code = codes[i];
+    if (code.parentNode.tagName !== 'PRE' && code.childElementCount === 0) {
+      text = code.textContent;
+      if (/^\\\((.|\s)+\\\)$/.test(text) || /^\\\[(.|\s)+\\\]$/.test(text) ||
+          /^\$\$(.|\s)+\$\$$/.test(text) ||
+          /^\\begin\{([^}]+)\}(.|\s)+\\end\{[^}]+\}$/.test(text)) {
+        code.outerHTML = code.innerHTML;  // remove <code></code>
+        continue;
+      }
+    }
+    i++;
+  }
+};
+slideshow._releaseMath(document);
+</script>
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+(function () {
+  var script = document.createElement('script');
+  script.type = 'text/javascript';
+  script.src  = 'https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-MML-AM_CHTML';
+  if (location.protocol !== 'file:' && /^https?:/.test(script.src))
+    script.src  = script.src.replace(/^https?:/, '');
+  document.getElementsByTagName('head')[0].appendChild(script);
+})();
+</script>
+  </body>
+</html>

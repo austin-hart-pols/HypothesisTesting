@@ -36,9 +36,18 @@ mov = mov %>%
   mutate(Era = if_else(year %in% 1970:1990, "1970-1990","1991-2013"))
 ```
 
-# Topics covered
+<style type="text/css">
+.remark-slide-content {
+    font-size: 25px;
+    padding: 1em 4em 1em 4em;
+}
+</style>
 
-- Hypothesis testing  
+# Hypothesis testing
+
+> A method of inference that provides a basis for rejecting a hypothesis based on the plausibility of the data. 
+>
+> Typically for evaluating "statistical significance" of an association observed in sample data. 
   
 - Four implementations
   - $t$-test for sample means
@@ -46,59 +55,62 @@ mov = mov %>%
   - $t$-test for regression coefficients
   - $\chi^2$-test for tabular analysis
   
-- Jung et al (2014). "Female-named hurricanes"  
+- EX: Jung et al (2014). "Female-named hurricanes"  
 
 
 ---
-class: inverse, middle, right
+# Terms to know
 
-# HYPOTHESIS TESTING
-### Logic and Process
+- Level of significance $\alpha$: probability of Type-I error  
 
+- p-value: probability of a sample statistic given a true null  
 
----
-# Hypothesis testing
+- Statistically significant: unlikely to have occurred by chance alone (given a true null)  
 
-### Statistical hypothesis testing 
+- Alternative hypothesis, $H_A$: your expectation about a characteristic of the population  
 
-> A method of inference that provides a basis for rejecting a hypothesis based on the plausibility of the data. 
->
-> Typically for evaluating "statistical significance" of an association observed in sample data.
+- Null hypothesis, $H_0$: the opposite of $H_A$. Status quo expectation.
 
 
 ---
-# Process for testing hypotheses
+# Hypothesis testing procedure
 
-> Given a hypothesis about a population parameter, calculate the probability of finding your sample statistic.  
-> Reject the hypothesis when probability is exceptionally low, typically below 0.05. 
-  
-Procedure:
+1. Specify hypotheses
 
-- Specify hypotheses
-  - Alternative: your expectation
-  - Null: mutually-exclusive opposite
-  
-- Select appropriate test statistic (e.g., Z-score) 
-  
-- Specify decision rule for rejecting null  
-  
-- Compute test statistic  
-  
-- Conclude
+2. Set criteria for rejecting the null
+
+3. Compute test statistic  
+
+3. Conclude
 
 
+---
+# Setting up hypotheses
 
+- **Alternative hypothesis,** $H_A$
+  - Your expectation of the population/truth
+  - Or the empirical implication of your theory
+
+- **Null hypothesis,** $H_0$
+  - Logical opposite of $H_A$
+  - Status quo expectation: you've found nothing new
+
+- TIPS
+  - ALWAYS frame hypotheses in terms of parameters
+  - Science is all about the null. 
+  
+  
 ---
 # Select the right test statistic
 
-> A test statistic is a number that standardizes your sample information in light of the null hypothesis.  
-> It expresses the deviation of the sample mean from the hypothesized parameter as a number of standard errors.
+> A test statistic is a number that summarizes how far your sample information is from the parameter value in the null hypothesis.  
 
-For a sample mean, you might compute the $Z$-statistic:
-
-$$
-Z = \frac{\bar{y}-\mu_0}{s_y/\sqrt{n}}
-$$
+- Sample proportion: $Z$ statistic
+- $t$ statistic for
+  - sample mean
+  - difference of means
+  - OLS regression coefficient
+- Tabular analysis: $\chi^2$
 
 
 
@@ -107,12 +119,12 @@ $$
 
 ### Set a decision rule for rejecting the null  
 
-
 - Choose a level of significance, typically $\alpha = 0.05$  
-  
-- Find the critical value, $Z^*$  
-   
-- Reject null if test statistic larger than critical value
+
+- Find the critical value for your test statistic, e.g., $t_{\alpha/2}$
+
+- Reject null if $t \geq t_{\alpha/2}$
+
 
 
 ---
@@ -121,9 +133,7 @@ $$
 .pull-left[
 ### Upper-tailed test
 
-Null can only be wrong in one direction.
-
-> Reject $H_0$ if $Z > 1.645$
+Reject $H_0$ if $t > 1.645$
 
 ```{r sclt1s, fig.width=3.5, fig.height=3, dpi=350}
   ggplot(NULL, aes(c(-3.5,3.5))) +
@@ -142,9 +152,8 @@ Null can only be wrong in one direction.
 .pull-right[
 ### Two-tailed test
 
-Null can be wrong in either direction.
+Reject $H_0$ if $\lvert t \rvert > 1.96$
 
-> Reject $H_0$ if $\lvert Z \rvert > 1.96$
 
 ```{r sclt2s, fig.width=3.5, fig.height=3, dpi=350}
   ggplot(NULL, aes(c(-3.5,3.5))) +
@@ -165,7 +174,7 @@ Null can be wrong in either direction.
 ---
 class: inverse, middle, right
 
-# FOUR TESTS IN R
+# FOUR HYPOTHESIS TESTS
 
 ### Using data from Jung et al. (2014)
 
@@ -210,9 +219,9 @@ class: inverse
 ]
 
 .right-column[
-- $H_A:~\mu > 5$
+- $H_A:~\mu > 6$
   
-- $H_0:~\mu\leq 5$
+- $H_0:~\mu\leq 6$
 
 - Statistics from replication data:  
 
@@ -271,7 +280,7 @@ $$
 
 - Reject or not?
 
-> I (reject/fail to reject) the null hypothesis. The mean score of 6.8 is (significantly/not significantly) ?? higher than 5 $(t=??,~p??)$, meaning that hurricane names are (significantly/not) more feminine on balance.
+> I reject the null. The mean rating is significantly higher than 6 $(t=2.4)$, meaning that hurricane names are significantly more feminine on balance.
 
 ]
 
@@ -429,9 +438,7 @@ class: inverse
 
 Given linear model: $damage_i = \beta_0 + \beta_1(femScale_i) + e_i$
 
-- $H_A:~ \beta_1 \neq 0$
-  
-- $H_0:~ \beta_1 = 0$
+- $H_0:~ \beta_1 = 0$, $H_A:~ \beta_1 \neq 0$
 
 - Regression estimates from replication data:
 
