@@ -172,15 +172,6 @@ Reject $H_0$ if $\lvert t \rvert > 1.96$
 
 
 ---
-class: inverse, middle, right
-
-# FOUR HYPOTHESIS TESTS
-
-### Using data from Jung et al. (2014)
-
-
-
----
 class: inverse
 # Population mean (t-test)
 
@@ -659,16 +650,3 @@ Use data below to caluclate the $\chi^2$ test statistic.
 ```
 ]
 
----
-# Tabular analysis
-
-.left-column[
-### Setup
-### Hypotheses
-### chi-squared stats
-### Reject?
-]
-
-.right-column[
-
-]
